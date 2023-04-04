@@ -38,8 +38,13 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     
-    "paginas.apps.PaginasConfig", #Vai ser nesse padrão todos os "apps" que for criado
+    #Vai ser nesse padrão todos os "apps" que for criado
+    "paginas.apps.PaginasConfig", 
     "cadastros.apps.CadastrosConfig",
+
+    # Ativar complementos
+    "crispy_forms",
+    "crispy_bootstrap5",
 ]
 
 MIDDLEWARE = [
