@@ -22,7 +22,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
 
 
-    <meta name="theme-color" content="#712cf9">
+    <meta name="theme-color" content="#1E90FF">
 
 
     <style>
@@ -60,6 +60,15 @@
                             </a>
                             <ul class="dropdown-menu">
                                 <li><a class="dropdown-item" href="{% url 'cadastrar-fornecedor' %}">Fornecedor</a></li>
+                                <li><a class="dropdown-item" href="{% url 'cadastrar-fabricante' %}">Fabricante</a></li>
+                                <li><a class="dropdown-item" href="{% url 'cadastrar-marca' %}">Marca</a></li>
+                                <li><a class="dropdown-item" href="{% url 'cadastrar-categoria' %}">Categoria</a></li>
+                                <li><hr class="dropdown-divider"></li>
+
+                                <li><a class="dropdown-item" href="{% url 'cadastrar-cliente' %}">Cliente</a></li>
+                                <li><a class="dropdown-item" href="{% url 'cadastrar-funcionario' %}">Funcionario</a></li>
+                                <li><a class="dropdown-item" href="{% url 'cadastrar-produto' %}">Produto</a></li>
+                                <li><a class="dropdown-item" href="{% url 'cadastrar-venda' %}">Venda</a></li>
                                 <li><hr class="dropdown-divider"></li>
                                 
                             </ul>

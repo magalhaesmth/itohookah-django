@@ -56,3 +56,9 @@ main>.container {
   white-space: nowrap;
   -webkit-overflow-scrolling: touch;
 }
+
+.footer {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+}
