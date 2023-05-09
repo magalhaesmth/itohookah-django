@@ -26,7 +26,7 @@ class FabricanteCreate(CreateView):
     model = Fabricante
     fields = ["nome"]
     template_name = "cadastros/form.html"
-    success_url = reverse_lazy("listar-fabricante") #Editar aqui depois para retornar a pagina inicial
+    success_url = reverse_lazy("listar-fabricante") 
     extra_context = {"titulo": "Cadastro de Fabricante"}
 
 class MarcaCreate(CreateView):
@@ -132,7 +132,7 @@ class FornecedorDelete(DeleteView):
     success_url = reverse_lazy("listar-fornecedor")
 
 class FabricanteDelete(DeleteView):
-    model = Fornecedor
+    model = Fabricante
     template_name = "cadastros/delete.html"
     success_url = reverse_lazy("listar-fabricante")
 
@@ -174,7 +174,7 @@ class FornecedorList(ListView):
     template_name = "cadastros/list/fornecedor.html"
 
 class FabricanteList(ListView):
-    model = Fornecedor
+    model = Fabricante
     template_name = "cadastros/list/fabricante.html"
 
 class MarcaList(ListView):

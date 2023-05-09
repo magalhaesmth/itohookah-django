@@ -1,0 +1,21 @@
+{% extends "paginas/modelo.html" %}
+
+{% load static %}
+
+{% load crispy_forms_tags %}
+
+{% block conteudo %}
+<h1 class="mt-5">{{titulo|default:"Deseja deletar?"}}</h1>
+
+<form action="" method="post">
+    {% csrf_token %}
+
+    <p>
+        Tem certeza que deseja excluir este registro: <b>{{object}}</b>
+    </p>
+
+
+    <button type="submit" class="btn btn-danger">Excluir</button>
+</form>
+
+{% endblock %}
