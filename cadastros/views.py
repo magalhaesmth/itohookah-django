@@ -58,6 +58,12 @@ class FuncionarioCreate(CreateView):
     success_url = reverse_lazy("listar-funcionario")
     extra_context = {"titulo": "Cadastro de Funcionario"}
 
+    #Método executado ao submeter um formulario
+    def form_valid(self, form):
+        form.instance.cadastrado_por = self.request.user
+        url = super().form_valid(form)
+        return url
+
 class ProdutoCreate(CreateView):
     model = Produto
     fields = ["nome", "valor", "codigo", "fornecedor", "marca", "categoria"]

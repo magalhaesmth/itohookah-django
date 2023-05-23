@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 # Create your models here.
 class Fornecedor(models.Model):
@@ -59,6 +60,8 @@ class Funcionario(models.Model):
     endereco = models.CharField(max_length=300)
     telefone = models.CharField(max_length=15)
 
+    usuario = models.OneToOneField(User, on_delete=models.CASCADE)
+
     cadastrado_em = models.DateTimeField(auto_now_add=True)
     atualizado_em = models.DateTimeField(auto_now=True)
 
@@ -89,8 +92,12 @@ class Venda(models.Model):
     cliente = models.ForeignKey(Cliente, on_delete=models.PROTECT)
     quantidade = models.FloatField(max_length=5)
 
+    ##Colocar funcionario depois
+
     cadastrado_em = models.DateTimeField(auto_now_add=True)
     atualizado_em = models.DateTimeField(auto_now=True)
+
+    cadastrado_por = models.ForeignKey(User, on_delete=models.PROTECT)
 
     def __str__(self):
         return f"{self.produto} | {self.quantidade}"
