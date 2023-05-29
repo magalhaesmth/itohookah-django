@@ -5,12 +5,12 @@
 {% block conteudo %}
 <div class="row justify-content-center align-items-center mt-3">
     <div class="col-md-8">
-        <h3 class="">Lista de Fabricante</h3>
+        <h3 class="">Lista de Vendas</h3>
     </div>
     <div class="col-md">
-        <a href="{% url 'cadastrar-fabricante' %}" class="btn btn-primary btn-sm">
+        <a href="{% url 'cadastrar-venda' %}" class="btn btn-primary btn-sm">
             <i class="bi bi-plus-lg"></i>
-            Cadastrar Fabricante
+            Cadastrar Venda
         </a>
     </div>
 </div>
@@ -21,15 +21,21 @@
     <table class="table table-striped">
         <thead>
             <tr>
-                <th>Nome</th>
-                <th>Data de Cadastro</th>
+                <th>Produto</th>
+                <th>Cliente</th>
+                <th>CPF/CPNJ</th>
+                <th>Quantidade</th>
+                <th>Valor</th>
             </tr>
         </thead>
         <tbody>
             {% for obj in object_list %}
             <tr class="">
-                <td>{{ obj.nome }}</td>
-                <td>{{ obj.cadastrado_em }}</td>
+                <td>{{ obj.produto.nome }}</td>
+                <td>{{ obj.cliente.nome }}</td>
+                <td>{{ obj.cliente.cpfCnpj }}</td>
+                <td>{{ obj.quantidade }}</td>
+                <td>{{ obj.produto.valor }}</td>
                 <td>
                     <div class="dropdown">
                         <a class="btn btn-sm btn-outline-secondary dropdown-toggle" href="#" role="button"
@@ -37,9 +43,9 @@
                             <i class="bi bi-gear"></i>
                         </a>
                         <ul class="dropdown-menu">
-                            <li><a class="dropdown-item text-primary" href="{% url 'editar-fabricante' obj.pk %}">
+                            <li><a class="dropdown-item text-primary" href="{% url 'editar-venda' obj.pk %}">
                                     <i class="bi bi-pencil-square"></i> Editar</a></li>
-                            <li><a class="dropdown-item text-danger" href="{% url 'excluir-fabricante' obj.pk %}">
+                            <li><a class="dropdown-item text-danger" href="{% url 'excluir-venda' obj.pk %}">
                                     <i class="bi bi-trash"></i> Excluir</a></li>
                         </ul>
                     </div>

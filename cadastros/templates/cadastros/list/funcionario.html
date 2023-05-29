@@ -5,12 +5,12 @@
 {% block conteudo %}
 <div class="row justify-content-center align-items-center mt-3">
     <div class="col-md-8">
-        <h3 class="">Lista de Fabricante</h3>
+        <h3 class="">Lista de Funcionário</h3>
     </div>
     <div class="col-md">
-        <a href="{% url 'cadastrar-fabricante' %}" class="btn btn-primary btn-sm">
+        <a href="{% url 'cadastrar-funcionario' %}" class="btn btn-primary btn-sm">
             <i class="bi bi-plus-lg"></i>
-            Cadastrar Fabricante
+            Cadastrar Funcionário
         </a>
     </div>
 </div>
@@ -22,13 +22,17 @@
         <thead>
             <tr>
                 <th>Nome</th>
-                <th>Data de Cadastro</th>
+                <th>Cargo</th>
+                <th>Telefone</th>
+                <th>Cadastrado em</th>
             </tr>
         </thead>
         <tbody>
             {% for obj in object_list %}
             <tr class="">
                 <td>{{ obj.nome }}</td>
+                <td>{{ obj.funcao }}</td>
+                <td>{{ obj.telefone }}</td>
                 <td>{{ obj.cadastrado_em }}</td>
                 <td>
                     <div class="dropdown">
@@ -37,9 +41,9 @@
                             <i class="bi bi-gear"></i>
                         </a>
                         <ul class="dropdown-menu">
-                            <li><a class="dropdown-item text-primary" href="{% url 'editar-fabricante' obj.pk %}">
+                            <li><a class="dropdown-item text-primary" href="{% url 'editar-funcionario' obj.pk %}">
                                     <i class="bi bi-pencil-square"></i> Editar</a></li>
-                            <li><a class="dropdown-item text-danger" href="{% url 'excluir-fabricante' obj.pk %}">
+                            <li><a class="dropdown-item text-danger" href="{% url 'excluir-funcionario' obj.pk %}">
                                     <i class="bi bi-trash"></i> Excluir</a></li>
                         </ul>
                     </div>

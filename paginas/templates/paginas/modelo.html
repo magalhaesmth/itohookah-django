@@ -40,7 +40,7 @@
         <!-- Fixed navbar -->
         <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-verde-escuro">
             <div class="container-fluid">
-                <a class="navbar-brand" href="{% url 'pagina-inicial' %}">ItoHookah</a>
+                <a class="navbar-brand" href="{% url 'pagina-inicial' %}"></marquee>ItoHookah</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"
                     aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -52,6 +52,24 @@
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="{% url 'sobre' %}">Sobre</a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                Listagem
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="{% url 'listar-fornecedor' %}">Fornecedor</a></li>
+                                <li><a class="dropdown-item" href="{% url 'listar-fabricante' %}">Fabricante</a></li>
+                                <li><a class="dropdown-item" href="{% url 'listar-marca' %}">Marca</a></li>
+                                <li><a class="dropdown-item" href="{% url 'listar-categoria' %}">Categoria</a></li>
+                                <li><hr class="dropdown-divider"></li>
+                                
+                                <li><a class="dropdown-item" href="{% url 'listar-cliente' %}">Cliente</a></li>
+                                <li><a class="dropdown-item" href="{% url 'listar-funcionario' %}">Funcionario</a></li>
+                                <li><a class="dropdown-item" href="{% url 'listar-produto' %}">Produto</a></li>
+                                <li><a class="dropdown-item" href="{% url 'listar-venda' %}">Venda</a></li>
+                                </li>
+                            </ul>
                         </li>
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
@@ -90,6 +108,9 @@
 
                     </ul>
 
+                    {% if request.user.is_authenticated %}
+                    <a class="btn btn-outline-light" href="{% url 'logout' %}">Sair</a>
+                    {% endif %}
                   
                 </div>
             </div>
