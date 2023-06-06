@@ -23,8 +23,8 @@
             <tr>
                 <th>Nome</th>
                 <th>Código</th>
+                 <th>Categoria</th>
                 <th>Fornecedor</th>
-                <th>Categoria</th>
                 <th>Marca</th>
                 <th>Valor</th>
             </tr>
@@ -34,8 +34,8 @@
             <tr class="">
                 <td>{{ obj.nome }}</td>
                 <td>{{ obj.codigo }}</td>
-                <td>{{ obj.fornecedor }}</td>
                 <td>{{ obj.categoria }}</td>
+                <td>{{ obj.fornecedor.nome }}</td>
                 <td>{{ obj.marca }}</td>
                 <td>{{ obj.valor }}</td>
                 <td>
