@@ -26,6 +26,11 @@
 
 
     <style>
+        .botao-img {
+            max-width: 150px; /* Defina o tamanho máximo em pixels que você deseja para a largura */
+            max-height: 140px; /* Defina o tamanho máximo em pixels que você deseja para a altura */
+        }
+
         .bi {
             vertical-align: 0;
         }
@@ -40,15 +45,16 @@
         <!-- Fixed navbar -->
         <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-verde-escuro">
             <div class="container-fluid">
-                <a class="navbar-brand" href="{% url 'pagina-inicial' %}"></marquee>ItoHookah</a>
+                {% if request.user.is_authenticated %}
+                <a class="navbar-brand" href="{% url 'pagina-inicial' %}">
+                    <img src="{% static 'img/itohookah.png' %}" alt="ItoHookah" class="botao-img">
+                </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"
                     aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarCollapse">
                     <ul class="navbar-nav me-auto mb-2 mb-md-0">
-                        <!-- Exibir apenas se o usuário estiver autenticado -->
-                        {% if request.user.is_authenticated %}
                         <li class="nav-item">
                             <a class="nav-link" aria-current="page" href="{% url 'pagina-inicial' %}"><i class="bi bi-house"></i> Home</a>
                         </li>
@@ -97,32 +103,12 @@
                             <a class="nav-link" href="{% url 'cadastrar-venda' %}">Carrinho</a>
                         </li>
                         {% endif %}                        
-                       
-                        <!--<li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
-                                aria-expanded="false">
-                                Dropdown
-                            </a>
-                            <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="#">Action</a></li>
-                                <li><a class="dropdown-item" href="#">Another action</a></li>
-                                <li>
-                                    <hr class="dropdown-divider">
-                                </li>
-                                <li><a class="dropdown-item" href="#">Something else here</a></li>
-                            </ul>
-                        </li> -->
-
                     </ul>
 
                     {% if request.user.is_authenticated %}
                     <a class="btn btn-outline-light" href="{% url 'logout' %}">Sair</a>
                     {% endif %}
-
-                    {% if not request.user.is_authenticated %}
-                    <a href="{% url 'login' %}" class="btn btn-light">Login</a>
-                    {% endif %}
-                  
+                                 
                 </div>
             </div>
         </nav>

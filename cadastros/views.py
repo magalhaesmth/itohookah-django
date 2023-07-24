@@ -12,7 +12,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 class FornecedorCreate(LoginRequiredMixin, CreateView):
     model = Fornecedor
     fields = ["nome", "telefone"]
-    template_name = "cadastros/form.html"
+    template_name = "cadastros/form-cadastros.html"
     success_url = reverse_lazy("listar-fornecedor")
     extra_context = {"titulo": "Cadastro de Fornecedores"}
 
@@ -25,21 +25,21 @@ class FornecedorCreate(LoginRequiredMixin, CreateView):
 class FabricanteCreate(CreateView):
     model = Fabricante
     fields = ["nome"]
-    template_name = "cadastros/form.html"
+    template_name = "cadastros/form-cadastros.html"
     success_url = reverse_lazy("listar-fabricante") 
     extra_context = {"titulo": "Cadastro de Fabricante"}
 
 class MarcaCreate(CreateView):
     model = Marca
     fields = ["nome", "fornecedor"]
-    template_name = "cadastros/form.html"
+    template_name = "cadastros/form-cadastros.html"
     success_url = reverse_lazy("listar-marca")
     extra_context = {"titulo": "Cadastro de Marca"}
 
 class CategoriaCreate(CreateView):
     model = Categoria
     fields = ["nome"]
-    template_name = "cadastros/form.html"
+    template_name = "cadastros/form-cadastros.html"
     success_url = reverse_lazy("listar-categoria")
     extra_context = {"titulo": "Cadastro de Categoria"}
 
@@ -47,14 +47,14 @@ class CategoriaCreate(CreateView):
 class ClienteCreate(CreateView):
     model = Cliente
     fields = ["nome", "cpfCnpj", "telefone", "endereco"]
-    template_name = "cadastros/form.html"
+    template_name = "cadastros/form-cadastros.html"
     success_url = reverse_lazy("listar-cliente")
     extra_context = {"titulo": "Cadastro de Cliente"}
 
 class FuncionarioCreate(CreateView):
     model = Funcionario
     fields = ["nome", "email", "funcao", "endereco", "telefone"]
-    template_name = "cadastros/form.html"
+    template_name = "cadastros/form-cadastros.html"
     success_url = reverse_lazy("listar-funcionario")
     extra_context = {"titulo": "Cadastro de Funcionario"}
 
@@ -67,14 +67,14 @@ class FuncionarioCreate(CreateView):
 class ProdutoCreate(CreateView):
     model = Produto
     fields = ["nome", "valor", "codigo", "fornecedor", "marca", "categoria"]
-    template_name = "cadastros/form.html"
+    template_name = "cadastros/form-cadastros.html"
     success_url = reverse_lazy("listar-produto")
     extra_context = {"titulo": "Cadastro de Produto"}
 
 class VendaCreate(CreateView):
     model = Venda
     fields = ["produto", "cliente", "quantidade"]
-    template_name = "cadastros/form.html"
+    template_name = "cadastros/form-cadastros.html"
     success_url = reverse_lazy("listar-venda")
     extra_context = {"titulo": "Cadastro de Venda"}
 
@@ -84,49 +84,49 @@ class VendaCreate(CreateView):
 class FornecedorUpdate(UpdateView):
     model = Fornecedor
     fields = ["nome", "telefone"]
-    template_name = "cadastros/form.html"
+    template_name = "cadastros/form-cadastros.html"
     success_url = reverse_lazy("listar-fornecedor")
 
 class FabricanteUpdate(UpdateView):
     model = Fabricante
     fields = ["nome"]
-    template_name = "cadastros/form.html"
+    template_name = "cadastros/form-cadastros.html"
     success_url = reverse_lazy("listar-fabricante")
 
 class MarcaUpdate(UpdateView):
     model = Marca
     fields = ["nome", "fornecedor"]
-    template_name = "cadastros/form.html"
+    template_name = "cadastros/form-cadastros.html"
     success_url = reverse_lazy("listar-marca")
 
 class CategoriaUpdate(UpdateView):
     model = Categoria
     fields = ["nome"]
-    template_name = "cadastros/form.html"
+    template_name = "cadastros/form-cadastros.html"
     success_url = reverse_lazy("listar-categoria")
 
 class ClienteUpdate(UpdateView):
     model = Cliente
     fields = ["nome", "cpfCnpj", "telefone", "endereco"]
-    template_name = "cadastros/form.html"
+    template_name = "cadastros/form-cadastros.html"
     success_url = reverse_lazy("listar-cliente")
 
 class FuncionarioUpdate(UpdateView):
     model = Funcionario
     fields = ["nome", "email", "funcao", "endereco", "telefone"]
-    template_name = "cadastros/form.html"
+    template_name = "cadastros/form-cadastros.html"
     success_url = reverse_lazy("listar-funcionario")
 
 class ProdutoUpdate(UpdateView):
     model = Produto
     fields = ["nome", "valor", "codigo", "fornecedor", "marca", "categoria"]
-    template_name = "cadastros/form.html"
+    template_name = "cadastros/form-cadastros.html"
     success_url = reverse_lazy("listar-produto")
 
 class VendaUpdate(UpdateView):
     model = Venda
     fields = ["produto", "cliente", "quantidade"]
-    template_name = "cadastros/form.html"
+    template_name = "cadastros/form-cadastros.html"
     success_url = reverse_lazy("listar-venda")
 
 
