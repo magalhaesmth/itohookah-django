@@ -1,3 +1,4 @@
+from cadastros.forms import VendaForm
 from .models import Categoria, Cliente, Fabricante, Fornecedor, Funcionario, Marca, Produto, Venda
 from django.urls import reverse_lazy
 
@@ -22,21 +23,21 @@ class FornecedorCreate(LoginRequiredMixin, CreateView):
         dados["titulo"] = "Cadastro de Fornecedor"
         return dados
 
-class FabricanteCreate(CreateView):
+class FabricanteCreate(LoginRequiredMixin, CreateView):
     model = Fabricante
     fields = ["nome"]
     template_name = "cadastros/form-cadastros.html"
     success_url = reverse_lazy("listar-fabricante") 
     extra_context = {"titulo": "Cadastro de Fabricante"}
 
-class MarcaCreate(CreateView):
+class MarcaCreate(LoginRequiredMixin, CreateView):
     model = Marca
     fields = ["nome", "fornecedor"]
     template_name = "cadastros/form-cadastros.html"
     success_url = reverse_lazy("listar-marca")
     extra_context = {"titulo": "Cadastro de Marca"}
 
-class CategoriaCreate(CreateView):
+class CategoriaCreate(LoginRequiredMixin, CreateView):
     model = Categoria
     fields = ["nome"]
     template_name = "cadastros/form-cadastros.html"
@@ -44,14 +45,14 @@ class CategoriaCreate(CreateView):
     extra_context = {"titulo": "Cadastro de Categoria"}
 
 
-class ClienteCreate(CreateView):
+class ClienteCreate(LoginRequiredMixin, CreateView):
     model = Cliente
     fields = ["nome", "cpfCnpj", "telefone", "endereco"]
     template_name = "cadastros/form-cadastros.html"
     success_url = reverse_lazy("listar-cliente")
     extra_context = {"titulo": "Cadastro de Cliente"}
 
-class FuncionarioCreate(CreateView):
+class FuncionarioCreate(LoginRequiredMixin, CreateView):
     model = Funcionario
     fields = ["nome", "email", "funcao", "endereco", "telefone"]
     template_name = "cadastros/form-cadastros.html"
@@ -64,66 +65,71 @@ class FuncionarioCreate(CreateView):
         url = super().form_valid(form)
         return url
 
-class ProdutoCreate(CreateView):
+class ProdutoCreate(LoginRequiredMixin, CreateView):
     model = Produto
     fields = ["nome", "valor", "codigo", "fornecedor", "marca", "categoria"]
     template_name = "cadastros/form-cadastros.html"
     success_url = reverse_lazy("listar-produto")
     extra_context = {"titulo": "Cadastro de Produto"}
 
-class VendaCreate(CreateView):
+class VendaCreate(LoginRequiredMixin, CreateView):
     model = Venda
-    fields = ["produto", "cliente", "quantidade"]
+    form_class = VendaForm
     template_name = "cadastros/form-cadastros.html"
     success_url = reverse_lazy("listar-venda")
-    extra_context = {"titulo": "Cadastro de Venda"}
+    extra_context = {"titulo": "Venda"}
+
+    def form_valid(self, form):
+        form.instance.cadastrado_por = self.request.user
+        url = super().form_valid(form)
+        return url
 
 
 #######################################################################################
 
-class FornecedorUpdate(UpdateView):
+class FornecedorUpdate(LoginRequiredMixin, UpdateView):
     model = Fornecedor
     fields = ["nome", "telefone"]
     template_name = "cadastros/form-cadastros.html"
     success_url = reverse_lazy("listar-fornecedor")
 
-class FabricanteUpdate(UpdateView):
+class FabricanteUpdate(LoginRequiredMixin, UpdateView):
     model = Fabricante
     fields = ["nome"]
     template_name = "cadastros/form-cadastros.html"
     success_url = reverse_lazy("listar-fabricante")
 
-class MarcaUpdate(UpdateView):
+class MarcaUpdate(LoginRequiredMixin, UpdateView):
     model = Marca
     fields = ["nome", "fornecedor"]
     template_name = "cadastros/form-cadastros.html"
     success_url = reverse_lazy("listar-marca")
 
-class CategoriaUpdate(UpdateView):
+class CategoriaUpdate(LoginRequiredMixin, UpdateView):
     model = Categoria
     fields = ["nome"]
     template_name = "cadastros/form-cadastros.html"
     success_url = reverse_lazy("listar-categoria")
 
-class ClienteUpdate(UpdateView):
+class ClienteUpdate(LoginRequiredMixin, UpdateView):
     model = Cliente
     fields = ["nome", "cpfCnpj", "telefone", "endereco"]
     template_name = "cadastros/form-cadastros.html"
     success_url = reverse_lazy("listar-cliente")
 
-class FuncionarioUpdate(UpdateView):
+class FuncionarioUpdate(LoginRequiredMixin, UpdateView):
     model = Funcionario
     fields = ["nome", "email", "funcao", "endereco", "telefone"]
     template_name = "cadastros/form-cadastros.html"
     success_url = reverse_lazy("listar-funcionario")
 
-class ProdutoUpdate(UpdateView):
+class ProdutoUpdate(LoginRequiredMixin, UpdateView):
     model = Produto
     fields = ["nome", "valor", "codigo", "fornecedor", "marca", "categoria"]
     template_name = "cadastros/form-cadastros.html"
     success_url = reverse_lazy("listar-produto")
 
-class VendaUpdate(UpdateView):
+class VendaUpdate(LoginRequiredMixin, UpdateView):
     model = Venda
     fields = ["produto", "cliente", "quantidade"]
     template_name = "cadastros/form-cadastros.html"
@@ -132,42 +138,42 @@ class VendaUpdate(UpdateView):
 
 ######################################################################################
 
-class FornecedorDelete(DeleteView):      
+class FornecedorDelete(LoginRequiredMixin, DeleteView):      
     model = Fornecedor
     template_name = "cadastros/delete.html"
     success_url = reverse_lazy("listar-fornecedor")
 
-class FabricanteDelete(DeleteView):
+class FabricanteDelete(LoginRequiredMixin, DeleteView):  
     model = Fabricante
     template_name = "cadastros/delete.html"
     success_url = reverse_lazy("listar-fabricante")
 
-class MarcaDelete(DeleteView):
+class MarcaDelete(LoginRequiredMixin, DeleteView):  
     model = Marca
     template_name = "cadastros/delete.html"
     success_url = reverse_lazy("listar-marca")
 
-class CategoriaDelete(DeleteView):
+class CategoriaDelete(LoginRequiredMixin, DeleteView):  
     model = Categoria
     template_name = "cadastros/delete.html"
     success_url = reverse_lazy("listar-categoria")
 
-class ClienteDelete(DeleteView):
+class ClienteDelete(LoginRequiredMixin, DeleteView):  
     model = Cliente
     template_name = "cadastros/delete.html"
     success_url = reverse_lazy("listar-cliente")
 
-class FuncionarioDelete(DeleteView):
+class FuncionarioDelete(LoginRequiredMixin, DeleteView):  
     model = Funcionario
     template_name = "cadastros/delete.html"
     success_url = reverse_lazy("listar-funcionario")
 
-class ProdutoDelete(DeleteView):
+class ProdutoDelete(LoginRequiredMixin, DeleteView):  
     model = Produto
     template_name = "cadastros/delete.html"
     success_url = reverse_lazy("listar-produto")
 
-class VendaDelete(DeleteView):
+class VendaDelete(LoginRequiredMixin, DeleteView):  
     model = Venda
     template_name = "cadastros/delete.html"
     success_url = reverse_lazy("listar-venda")
@@ -175,68 +181,68 @@ class VendaDelete(DeleteView):
 
 ######################################################################################
 
-class FornecedorList(ListView):
+class FornecedorList(LoginRequiredMixin, ListView):
     model = Fornecedor
     template_name = "cadastros/list/fornecedor.html"
 
-class FabricanteList(ListView):
+class FabricanteList(LoginRequiredMixin, ListView):
     model = Fabricante
     template_name = "cadastros/list/fabricante.html"
 
-class MarcaList(ListView):
+class MarcaList(LoginRequiredMixin, ListView):
     model = Marca
     template_name = "cadastros/list/marca.html"
 
-class CategoriaList(ListView):
+class CategoriaList(LoginRequiredMixin, ListView):
     model = Categoria
     template_name = "cadastros/list/categoria.html"
 
-class ClienteList(ListView):
+class ClienteList(LoginRequiredMixin, ListView):
     model = Cliente
     template_name = "cadastros/list/cliente.html"
 
-class FuncionarioList(ListView):
+class FuncionarioList(LoginRequiredMixin, ListView):
     model = Funcionario
     template_name = "cadastros/list/funcionario.html"
 
-class ProdutoList(ListView):
+class ProdutoList(LoginRequiredMixin, ListView):
     model = Produto
     template_name = "cadastros/list/produto.html"
 
-class VendaList(ListView):
+class VendaList(LoginRequiredMixin, ListView):
     model = Venda
     template_name = "cadastros/list/venda.html"
 
 ######################################################################################
 
-class FornecedorDetail(DetailView):
+class FornecedorDetail(LoginRequiredMixin, DetailView):
     model = Fornecedor
     template_name = "cadastros/detail/Fornecedor.html"
 
-class FabricanteDetail(DetailView):
+class FabricanteDetail(LoginRequiredMixin, DetailView):
     model = Fornecedor
     template_name = "cadastros/detail/fabricante.html"
 
-class MarcaDetail(DetailView):
+class MarcaDetail(LoginRequiredMixin, DetailView):
     model = Marca
     template_name = "cadastros/detail/marca.html"
 
-class CategoriaDetail(DetailView):
+class CategoriaDetail(LoginRequiredMixin, DetailView):
     model = Categoria
     template_name = "cadastros/detail/categoria.html"
 
-class ClienteDetail(DetailView):
+class ClienteDetail(LoginRequiredMixin, DetailView):
     model = Cliente
     template_name = "cadastros/detail/cliente.html"
 
-class FuncionarioDetail(DetailView):
+class FuncionarioDetail(LoginRequiredMixin, DetailView):
     model = Funcionario
     template_name = "cadastros/detail/funcionario.html"
 
-class ProdutoDetail(DetailView):
+class ProdutoDetail(LoginRequiredMixin, DetailView):
     model = Produto
     template_name = "cadastros/detail/produto.html"
 
-class VendaDetail(DetailView):
+class VendaDetail(LoginRequiredMixin, DetailView):
     model = Venda
     template_name = "cadastros/detail/venda.html"
