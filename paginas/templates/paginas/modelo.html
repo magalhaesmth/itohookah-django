@@ -59,11 +59,11 @@
                             <a class="nav-link" aria-current="page" href="{% url 'pagina-inicial' %}"><i class="bi bi-house"></i> Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{% url 'sobre' %}">Sobre</a>
+                            <a class="nav-link" href="{% url 'sobre' %}"><i class="bi bi-filter"></i> Sobre</a>
                         </li>
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                Listagem
+                                <i class="bi bi-card-list"></i> Listagem
                             </a>
                             <ul class="dropdown-menu">
                                 <li><a class="dropdown-item" href="{% url 'listar-fornecedor' %}">Fornecedor</a></li>
@@ -82,7 +82,7 @@
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
                                 aria-expanded="false">
-                                Cadastros
+                                <i class="bi bi-clipboard-plus"></i> Cadastros
                             </a>
                             <ul class="dropdown-menu">
                                 <li><a class="dropdown-item" href="{% url 'cadastrar-fornecedor' %}">Fornecedor</a></li>
@@ -97,10 +97,10 @@
                             </ul>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{% url 'cadastrar-venda' %}">Venda</a>
+                            <a class="nav-link" href="{% url 'cadastrar-venda' %}"><i class="bi bi-cash-coin"></i> Venda</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{% url 'cadastrar-venda' %}">Relatórios</a>
+                            <a class="nav-link" href="{% url 'cadastrar-venda' %}"><i class="bi bi-check-square"></i> Relatórios</a>
                         </li>
                         {% endif %}                        
                     </ul>
@@ -108,7 +108,7 @@
                     {% if request.user.is_authenticated %}
                     <a class="btn btn-outline-light" href="{% url 'logout' %}">Sair</a>
                     {% endif %}
-                                 
+                            
                 </div>
             </div>
         </nav>
