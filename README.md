@@ -8,3 +8,6 @@ python manage.py migrate
 ```bash
 python manage.py runserver
 ```
+```bash
+pip install crispy-bootstrap5
+```
