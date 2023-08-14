@@ -1,10 +1,31 @@
 {% extends 'paginas/modelo.html' %}
-
-<!-- Carregar e pertimir o uso dos arquivos estáticos -->
 {% load static %}
 
 {% block conteudo %}
+<style>
+    .image-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 20px;
+        margin-top: 20px;
+    }
 
-<h2 class="mt-4"><marquee> Seja bem vindo ao sistema da loja Ito Hookah! Todas as funções disponíveis estão acima deste texto. </marquee></h2>
+    .image-container img {
+        max-width: 35%;
+        /* Ajuste esse valor para controlar o tamanho das imagens */
+        height: auto;
+    }
+</style>
 
+<h2 class="mt-4">
+    <marquee> Seja bem vindo ao sistema da loja Ito Hookah! Todas as funções disponíveis estão acima deste texto.
+    </marquee>
+</h2>
+
+<div class="image-container">
+    <img src="{% static 'img/caixacarvao.png' %}" alt="Caixas de Carvão Fechadas">
+    <img src="{% static 'img/whisky.png' %}" alt="Logo da Empresa">
+    <img src="{% static 'img/essencia.png' %}" alt="Essencia para Arguile">
+</div>
 {% endblock %}
