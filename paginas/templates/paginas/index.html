@@ -12,9 +12,12 @@
     }
 
     .image-container img {
-        max-width: 35%;
-        /* Ajuste esse valor para controlar o tamanho das imagens */
+        max-width: 25%;
         height: auto;
+    }
+
+    .image-container img:nth-child(2) {
+        width: 230px;
     }
 </style>
 
@@ -26,6 +29,6 @@
 <div class="image-container">
     <img src="{% static 'img/caixacarvao.png' %}" alt="Caixas de Carvão Fechadas">
     <img src="{% static 'img/whisky.png' %}" alt="Logo da Empresa">
-    <img src="{% static 'img/essencia.png' %}" alt="Essencia para Arguile">
+    <img src="{% static 'img/essencia.png' %}" alt="Essência para Arguile">
 </div>
 {% endblock %}

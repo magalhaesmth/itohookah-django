@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     # Ativar complementos
     "crispy_forms",
     "crispy_bootstrap5",
+    'debug_toolbar',
 ]
 
 MIDDLEWARE = [
@@ -56,6 +57,7 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
+    'debug_toolbar.middleware.DebugToolbarMiddleware',
 ]
 
 ROOT_URLCONF = "itohookahapp.urls"
@@ -142,3 +144,8 @@ LOGIN_REDIRECT_URL = "pagina-inicial"
 # Configuração do crispy forms
 CRISPY_ALLOWED_TEMPLATE_PACKS = 'bootstrap5'
 CRISPY_TEMPLATE_PACK = 'bootstrap5'
+
+# Debug Toolbar
+INTERNAL_IPS = [
+    "127.0.0.1",
+]

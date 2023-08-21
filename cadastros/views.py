@@ -184,10 +184,18 @@ class VendaDelete(LoginRequiredMixin, DeleteView):
 class FornecedorList(LoginRequiredMixin, ListView):
     model = Fornecedor
     template_name = "cadastros/list/fornecedor.html"
+    paginate_by = 10 
+
+    def get_queryset(self):
+        return Fornecedor.objects.all()
 
 class FabricanteList(LoginRequiredMixin, ListView):
     model = Fabricante
     template_name = "cadastros/list/fabricante.html"
+    paginate_by = 10 
+
+    def get_queryset(self):
+        return Fornecedor.objects.all()
 
 class MarcaList(LoginRequiredMixin, ListView):
     model = Marca
@@ -205,13 +213,21 @@ class FuncionarioList(LoginRequiredMixin, ListView):
     model = Funcionario
     template_name = "cadastros/list/funcionario.html"
 
+
 class ProdutoList(LoginRequiredMixin, ListView):
     model = Produto
     template_name = "cadastros/list/produto.html"
+    paginate_by = 10 
+
+    def get_queryset(self):
+        return Produto.objects.select_related('marca__fornecedor', 'categoria').all()
 
 class VendaList(LoginRequiredMixin, ListView):
     model = Venda
     template_name = "cadastros/list/venda.html"
+
+    def get_queryset(self):
+        return Venda.objects.select_related('produto', 'cliente').all()
 
 ######################################################################################
 
