@@ -22,6 +22,7 @@
         <thead>
             <tr>
                 <th>Nome</th>
+                <th>Quantidade</th>
                 <th>Código</th>
                 <th>Categoria</th>
                 <th>Fornecedor</th>
@@ -33,11 +34,12 @@
             {% for obj in object_list %}
             <tr class="">
                 <td>{{ obj.nome }}</td>
+                <td>{{ obj.quantidade }}</td>
                 <td>{{ obj.codigo }}</td>
                 <td>{{ obj.categoria }}</td>
                 <td>{{ obj.fornecedor.nome }}</td>
                 <td>{{ obj.marca }}</td>
-                <td>{{ obj.valor }}</td>
+                <td>R${{ obj.valor }}</td>
                 <td>
                     <div class="dropdown">
                         <a class="btn btn-sm btn-outline-secondary dropdown-toggle" href="#" role="button"

@@ -69,10 +69,11 @@ class Funcionario(models.Model):
         return f"Nome: {self.nome} | Função: {self.funcao}"
     
 class Produto(models.Model):
+    codigo = models.IntegerField(verbose_name="Código")
     nome = models.CharField(max_length=50)
     valor = models.DecimalField(
         decimal_places=2, max_digits=9, verbose_name="Valor")
-    codigo = models.IntegerField(verbose_name="Código")
+    quantidade = models.IntegerField(verbose_name="Quantidade", default=0)
     fornecedor = models.ForeignKey(
         Fornecedor, on_delete=models.PROTECT, help_text="Selecione o fornecedor")
     marca = models.ForeignKey(

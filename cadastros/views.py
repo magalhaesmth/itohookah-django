@@ -67,7 +67,7 @@ class FuncionarioCreate(LoginRequiredMixin, CreateView):
 
 class ProdutoCreate(LoginRequiredMixin, CreateView):
     model = Produto
-    fields = ["nome", "valor", "codigo", "fornecedor", "marca", "categoria"]
+    fields = ["codigo", "nome", "valor", "quantidade", "fornecedor", "marca", "categoria"]
     template_name = "cadastros/form-cadastros.html"
     success_url = reverse_lazy("listar-produto")
     extra_context = {"titulo": "Cadastro de Produto"}
@@ -125,7 +125,7 @@ class FuncionarioUpdate(LoginRequiredMixin, UpdateView):
 
 class ProdutoUpdate(LoginRequiredMixin, UpdateView):
     model = Produto
-    fields = ["nome", "valor", "codigo", "fornecedor", "marca", "categoria"]
+    fields = ["codigo", "nome", "valor", "quantidade", "fornecedor", "marca", "categoria"]
     template_name = "cadastros/form-cadastros.html"
     success_url = reverse_lazy("listar-produto")
 
