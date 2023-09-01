@@ -1,63 +1,56 @@
-{% extends 'paginas/modelo.html' %}
+<!DOCTYPE html>
+<html>
 
-{% load static %}
+<head>
+    <title>Lista de Produtos</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
 
-{% block conteudo %}
-<div class="row justify-content-center align-items-center mt-3">
-    <div class="col-md-8">
-        <h3 class="">Lista de Vendas</h3>
-    </div>
-    <div class="col-md">
-        <a href="{% url 'cadastrar-venda' %}" class="btn btn-primary btn-sm">
-            <i class="bi bi-plus-lg"></i>
-            Cadastrar Venda
-        </a>
-    </div>
-</div>
-
-<hr>
-
-<div class="table-responsive-lg">
-    <table class="table table-striped">
+<body>
+    <h1>Lista de Produtos</h1>
+    <table id="tabela-produtos">
         <thead>
             <tr>
-                <th>Produto</th>
-                <th>Cliente</th>
-                <th>CPF/CPNJ</th>
-                <th>Quantidade</th>
+                <th>Código</th>
+                <th>Nome</th>
                 <th>Valor</th>
+                <th>Quantidade</th>
+                <th>Fornecedor</th>
+                <th>Marca</th>
+                <th>Categoria</th>
             </tr>
         </thead>
         <tbody>
-            {% for obj in object_list %}
-            <tr class="">
-                <td>{{ obj.produto.nome }}</td>
-                <td>{{ obj.cliente.nome }}</td>
-                <td>{{ obj.cliente.cpfCnpj }}</td>
-                <td>{{ obj.quantidade }}</td>
-                <td>{{ obj.produto.valor }}</td>
-                <td>
-                    <div class="dropdown">
-                        <a class="btn btn-sm btn-outline-secondary dropdown-toggle" href="#" role="button"
-                            data-bs-toggle="dropdown" aria-expanded="false">
-                            <i class="bi bi-gear"></i>
-                        </a>
-                        <ul class="dropdown-menu">
-                            <li><a class="dropdown-item text-primary" href="{% url 'editar-venda' obj.pk %}">
-                                    <i class="bi bi-pencil-square"></i> Editar</a></li>
-                            <li><a class="dropdown-item text-danger" href="{% url 'excluir-venda' obj.pk %}">
-                                    <i class="bi bi-trash"></i> Excluir</a></li>
-                        </ul>
-                    </div>
-                </td>
-            </tr>
-            {% empty %}
-            <tr>
-                <th colspan="100%">Nenhum registro encontrado.</th>
-            </tr>
-            {% endfor %}
         </tbody>
     </table>
-</div>
 
-{% endblock %}
+    <script>
+        $(document).ready(function () {
+            $.ajax({
+                url: '/listar_produtos/',
+                type: 'GET',
+                dataType: 'json',
+                success: function (data) {
+                    var produtos = data.produtos;
+                    var tbody = $('#tabela-produtos tbody');
+                    produtos.forEach(function (produto) {
+                        var tr = $('<tr>');
+                        tr.append($('<td>').text(produto.codigo));
+                        tr.append($('<td>').text(produto.nome));
+                        tr.append($('<td>').text(produto.valor));
+                        tr.append($('<td>').text(produto.quantidade));
+                        tr.append($('<td>').text(produto.fornecedor));
+                        tr.append($('<td>').text(produto.marca));
+                        tr.append($('<td>').text(produto.categoria));
+                        tbody.append(tr);
+                    });
+                },
+                error: function (xhr, status, error) {
+                    console.error(error);
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>

@@ -1,4 +1,5 @@
 from django.urls import path
+from . import views
 from .views import CategoriaCreate, CategoriaDelete, CategoriaDetail, CategoriaList, CategoriaUpdate, ClienteCreate, ClienteDelete, ClienteDetail, ClienteList, ClienteUpdate, FabricanteCreate, FabricanteDelete, FabricanteDetail, FabricanteList, FabricanteUpdate, FornecedorCreate, FornecedorUpdate, FornecedorList, FornecedorDelete, FornecedorDetail, FuncionarioCreate, FuncionarioDelete, FuncionarioDetail, FuncionarioList, FuncionarioUpdate, MarcaCreate, MarcaDelete, MarcaDetail, MarcaList, MarcaUpdate, ProdutoCreate, ProdutoDelete, ProdutoDetail, ProdutoList, ProdutoUpdate, VendaCreate, VendaDelete, VendaDetail, VendaList, VendaUpdate
 
 
@@ -49,5 +50,9 @@ urlpatterns = [
     path("detalhar/funcionario/<int:pk>/", FuncionarioDetail.as_view(), name="detalhar-funcionario"),
     path("detalhar/produto/<int:pk>/", ProdutoDetail.as_view(), name="detalhar-produto"),
     path("detalhar/venda/<int:pk>/", VendaDetail.as_view(), name="detalhar-venda"),
+
+    #Ajax
+
+    path("listar_produtos/", views.listar_produtos, name="listar_produtos"),
 
 ]

@@ -102,6 +102,11 @@ class Venda(models.Model):
 
     def __str__(self):
         return f"{self.produto} | {self.quantidade}"
- 
+    
+#=======================================================================================
+# Ajax 
+
+
+
  #Fazer um para Origem do Produto = importado ou não, da onde veio pa
  
