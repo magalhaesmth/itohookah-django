@@ -18,8 +18,31 @@
                         <i class="bi bi-check-lg"></i>
                         Entrar
                     </button>
+                    <button class="btn btn-dark mt-4 btn-senha" type="button">
+                        <i class="bi bi-eye-slash"></i>
+                    </button>
                 </form>
             </div>
         </div>
     </div>
+{% endblock %}
+
+
+{% block scripts %}
+<script>
+
+    $(document).ready(function () {
+
+        $(".btn-senha").click(function (e) {
+            var tipo = $("#id_password").attr("type");
+            if(tipo == "password"){
+                $("#id_password").attr("type", "text");
+            } else {
+                $("#id_password").attr("type", "password");
+            }
+        });
+
+    });
+
+</script>
 {% endblock %}

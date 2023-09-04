@@ -21,14 +21,50 @@
     }
 </style>
 
-<h2 class="mt-4">
+<h2 class="mt-4 titulo">
     <marquee> Seja bem vindo ao sistema da loja Ito Hookah! Todas as funções disponíveis estão acima deste texto.
     </marquee>
 </h2>
+
+<button type="button" class="btn btn-dark" id="botao">
+    Botão
+</button>
 
 <div class="image-container">
     <img src="{% static 'img/caixacarvao.png' %}" alt="Caixas de Carvão Fechadas">
     <img src="{% static 'img/whisky.png' %}" alt="Logo da Empresa">
     <img src="{% static 'img/essencia.png' %}" alt="Essência para Arguile">
 </div>
+{% endblock %}
+
+
+{% block scripts %}
+<script>
+
+    // $( seletor ).acao(parametro); //Sintaxe basica
+
+    // $( seletor ).evento(function(){
+    //     $(seletor).acao1(parametro);
+    //     $(seletor).acao2();
+    //     $(seletor).acao3(p1, p2);
+    // });
+
+    //Document é a pagina que estamos
+    $(document).ready(function () {
+        
+        // $(".titulo").hide(10000);
+        // $(".titulo").css("color", "#AA0000");
+
+        $("#botao").click(function (e) { 
+            var tipo = $("#botao").prop("type");
+
+            alert("Tipo do botão: " + tipo); 
+
+            $("#botao").prop("type", "reset");
+            
+        });
+
+    });
+
+</script>
 {% endblock %}
