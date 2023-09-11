@@ -22,3 +22,39 @@
 </form>
 
 {% endblock %}
+
+{% block scripts %}
+
+<!-- Importação do jQuery Mask Plugin -->
+<script src="{% static 'js/jquery.mask.js' %}"></script>
+
+<!-- Aplicar mascaras nos campos -->
+<script>
+    $(document).ready(function () {
+
+        var SPMaskBehavior = function (val) {
+            return val.replace(/\D/g, '').length === 11 ? '(00) 00000-0000' : '(00) 0000-00009';
+        },
+            spOptions = {
+                onKeyPress: function (val, e, field, options) {
+                    field.mask(SPMaskBehavior.apply({}, arguments), options);
+                }
+            };
+
+        $('#id_telefone').mask(SPMaskBehavior, spOptions);
+
+                var CpfCnpjBehavior = function (val) {
+            return val.replace(/\D/g, '').length === 11 ? '000.000.000-009' : '00.000.000/0000-009';
+        },
+            spOptions = {
+                onKeyPress: function (val, e, field, options) {
+                    field.mask(CpfCnpjBehavior.apply({}, arguments), options);
+                }
+            };
+
+        $('#id_cpfCnpj').mask(CpfCnpjBehavior, spOptions);
+
+    });
+</script>
+
+{% endblock %}
