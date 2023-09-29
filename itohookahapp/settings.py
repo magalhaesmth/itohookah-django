@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 """
 
 from pathlib import Path
+from django.contrib.messages import constants as messages
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -149,3 +150,8 @@ CRISPY_TEMPLATE_PACK = 'bootstrap5'
 INTERNAL_IPS = [
     "127.0.0.1",
 ]
+
+#Configuração mensagens de alerta
+MESSAGE_TAGS = {
+    messages.ERROR: "danger", #Altera a tag
+}

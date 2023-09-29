@@ -7,58 +7,65 @@ from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.views.generic.list import ListView
 from django.views.generic.detail import DetailView
 
+#Framework de mensagens/notificações
+from django.contrib.messages.views import SuccessMessageMixin
+
 from django.contrib.auth.mixins import LoginRequiredMixin
 # Create your views here.
 
 
-class FornecedorCreate(LoginRequiredMixin, CreateView):
+class FornecedorCreate(LoginRequiredMixin, SuccessMessageMixin, CreateView):
     model = Fornecedor
     fields = ["nome", "telefone"]
     template_name = "cadastros/form-cadastros.html"
     success_url = reverse_lazy("listar-fornecedor")
     extra_context = {"titulo": "Cadastro de Fornecedores"}
-
+    success_message = "Fornecedor %(nome)s foi cadastrado com sucesso!"
 
     def get_context_data(self, *args, **kwargs):
         dados = super().get_context_data(*args, **kwargs)
         dados["titulo"] = "Cadastro de Fornecedor"
         return dados
 
-class FabricanteCreate(LoginRequiredMixin, CreateView):
+class FabricanteCreate(LoginRequiredMixin, SuccessMessageMixin, CreateView):
     model = Fabricante
     fields = ["nome"]
     template_name = "cadastros/form-cadastros.html"
     success_url = reverse_lazy("listar-fabricante") 
     extra_context = {"titulo": "Cadastro de Fabricante"}
+    success_message = "Fabricante %(nome)s foi cadastrado com sucesso!"
 
-class MarcaCreate(LoginRequiredMixin, CreateView):
+class MarcaCreate(LoginRequiredMixin, SuccessMessageMixin, CreateView):
     model = Marca
     fields = ["nome", "fornecedor"]
     template_name = "cadastros/form-cadastros.html"
     success_url = reverse_lazy("listar-marca")
     extra_context = {"titulo": "Cadastro de Marca"}
+    success_message = "Marca %(nome)s foi cadastrado com sucesso!"
 
-class CategoriaCreate(LoginRequiredMixin, CreateView):
+class CategoriaCreate(LoginRequiredMixin, SuccessMessageMixin, CreateView):
     model = Categoria
     fields = ["nome"]
     template_name = "cadastros/form-cadastros.html"
     success_url = reverse_lazy("listar-categoria")
     extra_context = {"titulo": "Cadastro de Categoria"}
+    success_message = "Categoria %(nome)s foi cadastrado com sucesso!"
 
-
-class ClienteCreate(LoginRequiredMixin, CreateView):
+class ClienteCreate(LoginRequiredMixin, SuccessMessageMixin, CreateView):
     model = Cliente
     fields = ["nome", "cpfCnpj", "telefone", "endereco"]
     template_name = "cadastros/form-cadastros.html"
     success_url = reverse_lazy("listar-cliente")
     extra_context = {"titulo": "Cadastro de Cliente"}
+    success_message = "Cliente %(nome)s foi cadastrado com sucesso!"
 
-class FuncionarioCreate(LoginRequiredMixin, CreateView):
+class FuncionarioCreate(LoginRequiredMixin, SuccessMessageMixin, CreateView):
     model = Funcionario
     fields = ["nome", "email", "funcao", "endereco", "telefone"]
     template_name = "cadastros/form-cadastros.html"
     success_url = reverse_lazy("listar-funcionario")
     extra_context = {"titulo": "Cadastro de Funcionario"}
+    success_message = "Funcionário %(nome)s foi cadastrado com sucesso!"
 
     #Método executado ao submeter um formulario
     def form_valid(self, form):
@@ -66,14 +73,15 @@ class FuncionarioCreate(LoginRequiredMixin, CreateView):
         url = super().form_valid(form)
         return url
 
-class ProdutoCreate(LoginRequiredMixin, CreateView):
+class ProdutoCreate(LoginRequiredMixin, SuccessMessageMixin, CreateView):
     model = Produto
     fields = ["codigo", "nome", "valor", "quantidade", "fornecedor", "marca", "categoria"]
     template_name = "cadastros/form-cadastros.html"
     success_url = reverse_lazy("listar-produto")
     extra_context = {"titulo": "Cadastro de Produto"}
+    success_message = "Produto %(nome)s foi cadastrado com sucesso!"
 
-class VendaCreate(LoginRequiredMixin, CreateView):
+class VendaCreate(LoginRequiredMixin, SuccessMessageMixin, CreateView):
     model = Venda
     form_class = VendaForm
     template_name = "cadastros/form-cadastros.html"
@@ -88,49 +96,56 @@ class VendaCreate(LoginRequiredMixin, CreateView):
 
 #######################################################################################
 
-class FornecedorUpdate(LoginRequiredMixin, UpdateView):
+class FornecedorUpdate(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
     model = Fornecedor
     fields = ["nome", "telefone"]
     template_name = "cadastros/form-cadastros.html"
     success_url = reverse_lazy("listar-fornecedor")
+    success_message = "Fornecedor %(nome)s foi atualizado com sucesso!"
 
-class FabricanteUpdate(LoginRequiredMixin, UpdateView):
+class FabricanteUpdate(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
     model = Fabricante
     fields = ["nome"]
     template_name = "cadastros/form-cadastros.html"
     success_url = reverse_lazy("listar-fabricante")
+    success_message = "Fabricante %(nome)s foi atualizado com sucesso!"
 
-class MarcaUpdate(LoginRequiredMixin, UpdateView):
+class MarcaUpdate(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
     model = Marca
     fields = ["nome", "fornecedor"]
     template_name = "cadastros/form-cadastros.html"
     success_url = reverse_lazy("listar-marca")
+    success_message = "Marca %(nome)s foi atualizado com sucesso!"
 
-class CategoriaUpdate(LoginRequiredMixin, UpdateView):
+class CategoriaUpdate(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
     model = Categoria
     fields = ["nome"]
     template_name = "cadastros/form-cadastros.html"
     success_url = reverse_lazy("listar-categoria")
+    success_message = "Categoria %(nome)s foi atualizado com sucesso!"
 
-class ClienteUpdate(LoginRequiredMixin, UpdateView):
+class ClienteUpdate(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
     model = Cliente
     fields = ["nome", "cpfCnpj", "telefone", "endereco"]
     template_name = "cadastros/form-cadastros.html"
     success_url = reverse_lazy("listar-cliente")
+    success_message = "Cliente %(nome)s foi atualizado com sucesso!"
 
-class FuncionarioUpdate(LoginRequiredMixin, UpdateView):
+class FuncionarioUpdate(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
     model = Funcionario
     fields = ["nome", "email", "funcao", "endereco", "telefone"]
     template_name = "cadastros/form-cadastros.html"
     success_url = reverse_lazy("listar-funcionario")
+    success_message = "Funcionário %(nome)s foi atualizado com sucesso!"
 
-class ProdutoUpdate(LoginRequiredMixin, UpdateView):
+class ProdutoUpdate(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
     model = Produto
     fields = ["codigo", "nome", "valor", "quantidade", "fornecedor", "marca", "categoria"]
     template_name = "cadastros/form-cadastros.html"
     success_url = reverse_lazy("listar-produto")
+    success_message = "Produto %(nome)s foi atualizado com sucesso!"
 
-class VendaUpdate(LoginRequiredMixin, UpdateView):
+class VendaUpdate(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
     model = Venda
     fields = ["produto", "cliente", "quantidade"]
     template_name = "cadastros/form-cadastros.html"
