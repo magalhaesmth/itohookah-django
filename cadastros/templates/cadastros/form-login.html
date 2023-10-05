@@ -5,12 +5,12 @@
 {% load crispy_forms_tags %}
 
 {% block conteudo %}
-    <div class="container">
-        <div class="row justify-content-center align-items-center mt-5">
+    <div class="container" style="margin-left: 220px; margin-top: 230px;">
+        <div class="row align-items-center mt-5">
             <div class="col-md-4 text-center mb-4">
                 <img src="{% static 'img/itohookah.png' %}" alt="Logo" class="img-fluid mt-4">
             </div>
-            <div class="col-md-4">
+            <div class="col-md-3">
                 <form method="post">
                     {% csrf_token %}
                     {{ form|crispy }}
