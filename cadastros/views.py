@@ -2,6 +2,7 @@ from cadastros.forms import VendaForm
 from .models import Categoria, Cliente, Fabricante, Fornecedor, Funcionario, Marca, Produto, Venda
 from django.urls import reverse_lazy
 from django.http import JsonResponse
+from django.shortcuts import render
 
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.views.generic.list import ListView
@@ -286,3 +287,6 @@ def listar_produtos(request):
     produtos = Produto.objects.all()
     data = [{'codigo': produto.codigo, 'nome': produto.nome, 'valor': str(produto.valor), 'quantidade': produto.quantidade, 'fornecedor': produto.fornecedor.nome, 'marca': produto.marca.nome, 'categoria': produto.categoria.nome} for produto in produtos]
     return JsonResponse({'produtos': data})
+
+def venda(request):
+    return render(request, 'cadastros/venda.html')

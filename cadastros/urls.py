@@ -54,5 +54,6 @@ urlpatterns = [
     #Ajax
 
     path("listar_produtos/", views.listar_produtos, name="listar_produtos"),
+    path('venda/', views.venda, name='venda'),
 
 ]
