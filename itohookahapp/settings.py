@@ -155,3 +155,6 @@ INTERNAL_IPS = [
 MESSAGE_TAGS = {
     messages.ERROR: "danger", #Altera a tag
 }
+
+DECIMAL_SEPARATOR = ','
+USE_THOUSAND_SEPARATOR = True

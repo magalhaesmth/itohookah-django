@@ -7,15 +7,42 @@
 <!DOCTYPE html>
 <html>
 
-<head>
-    <title>Nova Tela</title>
-</head>
-
 <body>
-    <h1>Bem-vindo à Nova Tela!</h1>
-    <p>Esta é a nova tela que você está criando em Django.</p>
+    
+    <div>
+        <fieldset style="height: 500px; width: 1300px; border-radius: 5px; border: 2px solid #ccc; background-color: #f7f7f7;"></fieldset>
+        </fieldset>
+    </div>
+
+<div class="container" style="margin-top: 50px;">
+        <div class="col-md-8 no-padding-x no-padding-y">
+            <fieldset
+                style="padding: 10px 50px 0px 10px; height: 500px; width: 1300px; border-radius: 5px; border: 2px solid #ccc; background-color: #f7f7f7;">
+                <legend style="padding: 5px;"><b>Pesquisa de Lançamentos</b></legend>
+                <form id="formBusca" onsubmit="return false" method="post"
+                    class="ng-pristine ng-valid ng-valid-maxlength">
+                    <div class="row">
+                        <div class="col-md-5">
+                            <div class="form-group" style="text-align: left">
+                            
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-8">
+                            <div class="form-group">
+                                <label>Contenha na Descrição/Conta</label>
+                                <input class="form-control ng-pristine ng-untouched ng-valid ng-empty">
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </fieldset>
+        </div>
+</div>
+
 </body>
 
 </html>
 
-    {% endblock %}
+{% endblock %}
