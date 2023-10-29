@@ -17,3 +17,9 @@ pip install crispy-bootstrap5
 ```bash
 pip install django-debug-toolbar
 ```
+
+## Diagrama de Classes
+
+<h1 align=center>
+    <img src="/static/img/diagramadeclasses.png">
+</h1>
