@@ -13,7 +13,20 @@
         <div class="col-md-8">
             <fieldset
                 style="padding: 10px 50px 0px 10px; height: 500px; width: 1700px; margin-left: -220px; border-radius: 5px; border: 2px solid #ccc; background-color: #f7f7f7;">
-                <form id="formBusca" onsubmit="return false" method="post">
+                    <form id="formBusca" onsubmit="return false" method="post">
+                    <div class="row">
+                        <div class="col-md-1">
+                            <div class="form-group d-flex flex-column align-items-center">
+                                <label><b>Cód. Cliente</b></label>
+                                <input class="form-control">
+                            </div>
+                        </div>
+                        <div class="col-md-9" style="width: 1500px;">
+                            <div class="form-group d-flex flex-column align-items-center">
+                                <label><b>Cliente</b></label>
+                                <input class="form-control">
+                            </div>
+                        </div>
                     <div class="row">
                         <div class="col-md-1">
                             <div class="form-group d-flex flex-column align-items-center">
@@ -39,14 +52,45 @@
                                 <input class="form-control">
                             </div>
                         </div>
+                    </div>
                     <div class="row">
-                        <div class="col-md-3">
+                        <div class="col-md-2">
                             <div class="form-group d-flex flex-column align-items-center">
-                                <label><b>Cliente</b></label>
+                                <label><b>Desconto %</b></label>
                                 <input class="form-control">
                             </div>
                         </div>
                     </div>
+                    <div class="row">
+                        <div class="col-md-2">
+                            <div class="form-group d-flex flex-column align-items-center">
+                                <label><b>Desconto R$</b></label>
+                                <input class="form-control">    
+                            </div>  
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-2">
+                            <div class="form-group d-flex flex-column align-items-center">
+                                <label><b>Total</b></label>
+                                <input class="form-control">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-2">
+                            <div class="form-group d-flex flex-column align-items-center">
+                                <input style="height: 50px; width: 249px; margin-top: 20px;" value="Finalizar Venda" name="finalizarvenda" id="finalizarvenda" type="submit" class="btn btn-primary">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-2">
+                            <div class="form-group d-flex flex-column align-items-center">
+                                <input style="height: 50px; width: 249px; margin-top: 20px;" value="Limpar Campos" name="limparcampos"
+                                    id="limparcampos" type="submit" class="btn btn-primary">
+                            </div>
+                        </div>
                     </div>
                 </form>
             </fieldset>
