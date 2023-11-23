@@ -46,6 +46,11 @@ class Cliente(models.Model):
     cpfCnpj = models.CharField(max_length=14, verbose_name="CPF", unique=True)
     telefone = models.CharField(max_length=15)
     endereco = models.CharField(max_length=300)
+    cep = models.CharField(max_length=10, verbose_name="CEP")
+    logradouro = models.CharField(max_length=100)
+    numero = models.CharField(max_length=20, verbose_name="Número", null=True, blank=True)
+    bairro = models.CharField(max_length=50, null=True, blank=True)
+    cidade = models.CharField(max_length=50)
 
     cadastrado_em = models.DateTimeField(auto_now_add=True)
     atualizado_em = models.DateTimeField(auto_now=True)

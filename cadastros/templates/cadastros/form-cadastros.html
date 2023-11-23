@@ -57,4 +57,94 @@
     });
 </script>
 
+<!-- Aplicar máscaras nos campos -->
+<script>
+    $(document).ready(function () {
+
+        $("#x, #y, .z").attr("type", "text");
+        $("#x, #y, .z").addClass("numeros");
+
+        $("#id_cpf").mask("000.000.000-00");
+        $("#id_cep").mask("00000-000");
+        $("input[name*=data_]").mask("00/00/0000");
+
+        var SPMaskBehavior = function (val) {
+            return val.replace(/\D/g, '').length === 11 ? '(00) 00000-0000' : '(00) 0000-00009';
+        },
+            spOptions = {
+                onKeyPress: function (val, e, field, options) {
+                    field.mask(SPMaskBehavior.apply({}, arguments), options);
+                }
+            };
+
+        $('#id_telefone').mask(SPMaskBehavior, spOptions);
+
+
+        var CpfCnpjBehavior = function (val) {
+            return val.replace(/\D/g, '').length <= 11 ? '000.000.000-009' : '00.000.000/0000-00';
+        },
+            cpfcnpjOptions = {
+                onKeyPress: function (val, e, field, options) {
+                    field.mask(CpfCnpjBehavior.apply({}, arguments), options);
+                }
+            };
+
+        $('#id_cpfCnpj').mask(CpfCnpjBehavior, cpfcnpjOptions);
+
+
+        $("form").submit(function (e) {
+
+            $.each(".numeros", function (i, valor) {
+                valor = valor.replace(".", "").replace(",", ".");
+                $(this).attr("type", "number");
+                $(this).val(valor);
+            });
+
+        });
+
+        // Consulta o CEP com Ajax
+        $("#id_cep").blur(function (e) {
+
+            // Limpa os campos
+            $("#id_logradouro").val("");
+            $("#id_bairro").val("");
+            $("#id_cidade").val("");
+
+            var cep = $("#id_cep").val();
+
+            if (cep.length < 9) {
+                return;
+            }
+
+            $("#div_id_cep").append(
+                '<section class="dots-container">' +
+                '<div class="dot"></div>' +
+                '<div class="dot"></div>' +
+                '<div class="dot"></div>' +
+                '<div class="dot"></div>' +
+                '<div class="dot"></div>' +
+                '</section>'
+            );
+
+            var url = "https://viacep.com.br/ws/" + cep + "/json/";
+
+            $.getJSON(url, "",
+                function (data, textStatus, jqXHR) {
+
+                    if (data.erro != true) {
+                        $("#id_logradouro").val(data.logradouro);
+                        $("#id_bairro").val(data.bairro);
+                        $("#id_cidade").val(data.localidade + "/" + data.uf);
+                        $("#id_numero").focus();
+                    }
+
+
+                }
+            );
+
+        });
+
+    });
+</script>
+
 {% endblock %}

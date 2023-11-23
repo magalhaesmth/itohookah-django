@@ -54,7 +54,7 @@ class CategoriaCreate(LoginRequiredMixin, SuccessMessageMixin, CreateView):
 
 class ClienteCreate(LoginRequiredMixin, SuccessMessageMixin, CreateView):
     model = Cliente
-    fields = ["nome", "cpfCnpj", "telefone", "endereco"]
+    fields = ["nome", "cpfCnpj", "telefone", "cep", "logradouro", "numero", "bairro", "cidade"]
     template_name = "cadastros/form-cadastros.html"
     success_url = reverse_lazy("listar-cliente")
     extra_context = {"titulo": "Cadastro de Cliente"}
@@ -127,7 +127,7 @@ class CategoriaUpdate(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
 
 class ClienteUpdate(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
     model = Cliente
-    fields = ["nome", "cpfCnpj", "telefone", "endereco"]
+    fields = ["nome", "cpfCnpj", "telefone", "cep", "logradouro", "numero", "bairro", "cidade"]
     template_name = "cadastros/form-cadastros.html"
     success_url = reverse_lazy("listar-cliente")
     success_message = "Cliente %(nome)s foi atualizado com sucesso!"
