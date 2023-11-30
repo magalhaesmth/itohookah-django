@@ -68,6 +68,9 @@
                         <li class="nav-item">
                             <a class="nav-link" href="{% url 'sobre' %}"><i class="bi bi-filter"></i> Sobre</a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'relatorios' %}"><i class="bi bi-clipboard2"></i> Relatórios</a>
+                        </li>
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 <i class="bi bi-card-list"></i> Listagem
@@ -105,9 +108,6 @@
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="{% url 'cadastrar-venda' %}"><i class="bi bi-cash-coin"></i> Venda</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{% url 'cadastrar-venda' %}"><i class="bi bi-check-square"></i> Relatórios</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="{% url 'venda' %}"><i class="bi bi-cart3"></i> Vender</a>
@@ -149,7 +149,7 @@
         <div class="container">
             <span class="text-muted">
                 {% block rodape %}
-                Sistema de gerenciamento da loja ItoHookah
+                Sistema de gerenciamento da loja <b>ItoHookah</b>
                 -
                 Desenvolvido por Matheus Magalhães</span>
                 {% endblock %}

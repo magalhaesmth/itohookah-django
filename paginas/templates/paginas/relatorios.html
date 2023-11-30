@@ -1,0 +1,45 @@
+{% extends "paginas/modelo.html" %}
+
+{% load static %}
+
+{% load crispy_forms_tags %}
+
+{% block conteudo %}
+
+<style>
+    td, th {
+        text-align: center;
+        font-size: 18px;
+    }
+</style>
+
+<h2 class="mt-4" style="text-align: left;">Relatórios</h2>
+
+    <p class="lead" style="text-align: left;">Estatísticas do cadastros do mês atual</p>
+    
+    <div class="table-responsive-lg">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Categorias</th>
+                    <th>Clientes</th>
+                    <th>Fabricantes</th>
+                    <th>Fornecedores</th>
+                    <th>Marcas</th>
+                    <th>Produtos</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="">
+                    <td>{{ categorias }}</td>
+                    <td>{{ clientes }}</td>
+                    <td>{{ fabricantes }}</td>
+                    <td>{{ forncedores }}</td>
+                    <td>{{ marcas }}</td>
+                    <td>{{ produtos }}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+{% endblock %}
