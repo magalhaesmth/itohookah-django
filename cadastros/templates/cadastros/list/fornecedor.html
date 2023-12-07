@@ -19,12 +19,13 @@
 <hr>
 
 <div class="table-responsive-lg">
-    <table class="table table-striped">
+    <table class="table table-striped" id="tabela-listar">
         <thead>
             <tr>
                 <th>Nome</th>
                 <th>Telefone</th>
                 <th>Data de Cadastro</th>
+                <th>Opções</th>
             </tr>
         </thead>
         <tbody>
@@ -55,6 +56,17 @@
             {% endfor %}
         </tbody>
     </table>
+
+        {% block scripts %}
+    
+        <script>
+            $(document).ready(function () {
+
+                $("#tabela-listar").DataTable();
+            });
+        </script>
+        {% endblock %}
+
 </div>
 
 {% endblock %}
