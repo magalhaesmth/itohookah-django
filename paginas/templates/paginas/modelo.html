@@ -69,6 +69,9 @@
                             <a class="nav-link" href="{% url 'sobre' %}"><i class="bi bi-filter"></i> Sobre</a>
                         </li>
                         <li class="nav-item">
+                            <a class="nav-link" href="{% url 'registrar' %}"><i class="bi bi-person-add"></i> Novo Usuário</a>
+                        </li>
+                        <li class="nav-item">
                             <a class="nav-link" href="{% url 'relatorios' %}"><i class="bi bi-clipboard2"></i> Relatórios</a>
                         </li>
                         <li class="nav-item dropdown">
@@ -114,11 +117,12 @@
                         </li>
                         {% endif %}                        
                     </ul>
-
                     {% if request.user.is_authenticated %}
-                    <a class="btn btn-outline-light" href="{% url 'logout' %}">Sair</a>
+                    <form method="post" action="{% url 'logout' %}">
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-outline-light">Sair</button>
+                    </form>
                     {% endif %}
-                            
                 </div>
             </div>
         </nav>
