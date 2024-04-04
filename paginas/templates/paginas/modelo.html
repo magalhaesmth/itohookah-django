@@ -25,21 +25,47 @@
     <meta name="theme-color" content="#1E90FF">
 
 
-    <style>
-        .botao-img {
-            max-width: 150px; /* Defina o tamanho máximo em pixels que você deseja para a largura */
-            max-height: 140px; /* Defina o tamanho máximo em pixels que você deseja para a altura */
+<style>
+    .image-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 30px;
+        margin-top: 25px;
+    }
+
+    .image-container img {
+        max-width: 40%;
+        height: auto;
+    }
+
+    .image-container img:nth-child(1) {
+        width: 35%;
+    }
+
+    .image-container img:nth-child(3) {
+        width: 35%;
+    }
+
+    .botao-img {
+            max-width: 150px;
+            max-height: 140px; 
         }
 
-        .bi {
+    .bi {
             vertical-align: 0;
         }
-        .navbar-brand {
+
+    .navbar-brand {
         position: absolute;
         left: 50%;
         transform: translateX(-50%);
     }
-    </style>
+    .branco{
+        color: #f1f1f1;
+    }
+
+</style>
 
 </head>
 
@@ -50,11 +76,11 @@
     {% block menu %}
     <header>
         <!-- Fixed navbar -->
-        <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-verde-escuro">
+        <nav class="navbar navbar-expand-md navbar-dark fixed-top" style="background: linear-gradient(to right, #138613, #352806, #138613);">
             <div class="container-fluid">
                 {% if request.user.is_authenticated %}
                 <a class="navbar-brand" href="{% url 'pagina-inicial' %}">
-                    <img src="{% static 'img/itohookah.png' %}" alt="ItoHookah" class="botao-img">
+                    <img src="{% static 'img/logodois-vetorizada-2.png' %}" alt="ItoHookah" class="botao-img">
                 </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"
                     aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
@@ -63,19 +89,19 @@
                 <div class="collapse navbar-collapse" id="navbarCollapse">
                     <ul class="navbar-nav me-auto mb-2 mb-md-0">
                         <li class="nav-item">
-                            <a class="nav-link" aria-current="page" href="{% url 'pagina-inicial' %}"><i class="bi bi-house"></i> Home</a>
+                            <a class="nav-link branco" aria-current="page" href="{% url 'pagina-inicial' %}"><i class="bi bi-house"></i> Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{% url 'sobre' %}"><i class="bi bi-filter"></i> Sobre</a>
+                            <a class="nav-link branco" href="{% url 'sobre' %}"><i class="bi bi-filter"></i> Sobre</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{% url 'registrar' %}"><i class="bi bi-person-add"></i> Novo Usuário</a>
+                            <a class="nav-link branco" href="{% url 'registrar' %}"><i class="bi bi-person-add"></i> Novo Usuário</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{% url 'relatorios' %}"><i class="bi bi-clipboard2"></i> Relatórios</a>
+                            <a class="nav-link branco" href="{% url 'relatorios' %}"><i class="bi bi-clipboard2"></i> Relatórios</a>
                         </li>
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <a class="nav-link dropdown-toggle branco" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 <i class="bi bi-card-list"></i> Listagem
                             </a>
                             <ul class="dropdown-menu">
@@ -93,7 +119,7 @@
                             </ul>
                         </li>
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                            <a class="nav-link dropdown-toggle branco" href="#" role="button" data-bs-toggle="dropdown"
                                 aria-expanded="false">
                                 <i class="bi bi-clipboard-plus"></i> Cadastros
                             </a>
@@ -110,17 +136,17 @@
                             </ul>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{% url 'cadastrar-venda' %}"><i class="bi bi-cash-coin"></i> Venda</a>
+                            <a class="nav-link branco" href="{% url 'cadastrar-venda' %}"><i class="bi bi-cash-coin"></i> Venda</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{% url 'venda' %}"><i class="bi bi-cart3"></i> Vender</a>
+                            <a class="nav-link branco" href="{% url 'venda' %}"><i class="bi bi-cart3"></i> Vender</a>
                         </li>
                         {% endif %}                        
                     </ul>
                     {% if request.user.is_authenticated %}
                     <form method="post" action="{% url 'logout' %}">
                         {% csrf_token %}
-                        <button type="submit" class="btn btn-outline-light">Sair</button>
+                        <button type="submit" class="btn btn-outline-light" st>Sair</button>
                     </form>
                     {% endif %}
                 </div>

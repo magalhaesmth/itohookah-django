@@ -5,17 +5,17 @@
 {% load crispy_forms_tags %}
 
 {% block conteudo %}
-    <div class="container" style="margin-left: 220px; margin-top: 230px;">
+    <div class="container" style="margin-left: 220px; margin-top: 100px;">
         <div class="row align-items-center mt-5">
             <div class="col-md-4 text-center mb-4">
-                <img src="{% static 'img/itohookah.png' %}" alt="Logo" class="img-fluid mt-4">
+                <img src="{% static 'img/logodois-vetorizada.png' %}" alt="Logo" class="img-fluid mt-4">
             </div>
             <div class="col-md-3">
                 <form method="post">
                     {% csrf_token %}
                     {{ form|crispy }}
                     <button type="submit" class="btn btn-success btn-block mt-4">
-                        <i class="bi bi-check-lg"></i>
+                        <i class="bi bi-check-lg" style="color: #0f9c0f;"></i>
                         Entrar
                     </button>
                     <button class="btn btn-dark mt-4 btn-senha" type="button">
