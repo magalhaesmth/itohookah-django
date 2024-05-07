@@ -1,0 +1,49 @@
+{% extends 'paginas/modelo.html' %}
+
+{% load static %}
+
+<!-- Carrega os filtros -->
+{% load meus_filtros %}
+
+{% block conteudo %}
+
+<div class="row justify-content-center align-items-center mt-3">
+    <div class="col-md-8">
+        <h3 class="">Pedidos</h3>
+    </div>
+    <div class="col-md">
+        <a href="{% url 'cadastrar-pedido' %}" class="btn btn-primary btn-sm">
+            <i class="bi bi-plus-lg"></i>
+            Cadastrar Pedido
+        </a>
+    </div>
+</div>
+
+<hr>
+
+<div class="table-responsive-lg">
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Código</th>
+                <th>Produto</th>
+                <th>Quantidade</th>
+                <th>Preço Unitário</th>
+                <th>Valor Total</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for obj in carrinho %}
+            <tr class="">
+                <td>{{ obj.pk }}</td>
+                <td>{{ obj.produto.nome }}</td>
+                <td>{{ obj.quantidade }}</td>
+                <td>{{ obj.produto.valor }}</td>
+                <td>{{ obj.quantidade|valor_total_item_carrinho:obj.produto.valor }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+{% endblock %}

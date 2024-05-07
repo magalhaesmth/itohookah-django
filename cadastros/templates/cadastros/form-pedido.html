@@ -1,0 +1,54 @@
+{% extends "paginas/modelo.html" %}
+
+{% load static %}
+
+<!-- Carrega os filtros -->
+{% load meus_filtros %}
+
+{% load crispy_forms_tags %}
+
+{% block conteudo %}
+<h1 class="mt-5">{{titulo|default:"Formulário"}}</h1>
+
+<div class="table-responsive-lg">
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Código</th>
+                <th>Produto</th>
+                <th>Quantidade</th>
+                <th>Preço Unitário</th>
+                <th>Valor Total</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for obj in carrinho %}
+            <tr class="">
+                <td>{{ obj.pk }}</td>
+                <td>{{ obj.produto.nome }}</td>
+                <td>{{ obj.quantidade }}</td>
+                <td>{{ obj.produto.valor }}</td>
+                <td>{{ obj.quantidade|valor_total_item_carrinho:obj.produto.valor }}</td>
+            </tr>
+            {% empty %}
+            <tr>
+                <th colspan="100%">Nenhum item adicionado ao Carrinho de Compras.</th>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+<form action="" method="post">
+    {% csrf_token %}
+
+    {{ form|crispy }}
+
+    <button type="submit" class="btn btn-success">{{descricao_botao|default:"Salvar"}}</button>
+</form>
+
+{% endblock %}
+
+{% block scripts %}
+{{ form.media }}
+{% endblock %}

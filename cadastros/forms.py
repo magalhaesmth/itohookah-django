@@ -1,13 +1,25 @@
+from dal import autocomplete
 from django import forms
-from .models import Venda
+from .models import Pedido, Produto
 
-class VendaForm(forms.ModelForm):
+
+class ProdutoForms(forms.ModelForm):
+    preco = forms.DecimalField(decimal_places=2, max_digits=9, localize=True)
+
     class Meta:
-        model = Venda
-        fields = ["produto", "cliente", "quantidade"]
-
+        model = Produto
+        fields = ["nome", "preco", "codigo", "marca"]
+    
+class PedidoForms(forms.ModelForm):
+    class Meta:
+        model = Pedido
+        fields = ["ciclo", "cliente"]
         widgets = {
-            'produto': forms.Select(attrs={'class': 'form-control', 'placeholder': 'Selecione um produto'}),
-            'cliente': forms.Select(attrs={'class': 'form-control', 'placeholder': 'Selecione um cliente'}),
-            'quantidade': forms.NumberInput(attrs={'class': 'form-control', 'placeholder': 'Informe a quantidade'}),
+            'cliente': autocomplete.ModelSelect2(
+                url='buscar-cliente',
+                attrs={
+                    'data-placeholder': 'Informe o nome do Cliente...',
+                    'data-minimum-input-length': 3,
+                },
+            )
         }

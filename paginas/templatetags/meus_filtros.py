@@ -15,3 +15,7 @@ def remover(texto, sai):
 @register.simple_tag(name="substituir")
 def substituir(texto, sai, entra):
     return texto.replace(sai, entra)
+
+@register.filter(name="valor_total_item_carrinho")
+def valor_total_item_carrinho(quantidade, valor):
+    return quantidade * valor

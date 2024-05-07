@@ -114,7 +114,8 @@
                                 <li><a class="dropdown-item" href="{% url 'listar-cliente' %}">Cliente</a></li>
                                 <li><a class="dropdown-item" href="{% url 'listar-funcionario' %}">Funcionario</a></li>
                                 <li><a class="dropdown-item" href="{% url 'listar-produto' %}">Produto</a></li>
-                                <li><a class="dropdown-item" href="{% url 'listar-venda' %}">Venda</a></li>
+                                <li><a class="dropdown-item" href="{% url 'listar-pedido' %}">Pedido</a>
+                                <li><a class="dropdown-item" href="{% url 'listar-carrinho' %}">Carrinho</a>
                                 </li>
                             </ul>
                         </li>
@@ -133,14 +134,10 @@
                                 <li><a class="dropdown-item" href="{% url 'cadastrar-cliente' %}">Cliente</a></li>
                                 <li><a class="dropdown-item" href="{% url 'cadastrar-funcionario' %}">Funcionario</a></li>
                                 <li><a class="dropdown-item" href="{% url 'cadastrar-produto' %}">Produto</a></li>
+                                <li><a class="dropdown-item" href="{% url 'cadastrar-pedido' %}">Pedido</a>
+                                <li><a class="dropdown-item" href="{% url 'cadastrar-carrinho' %}">Carrinho</a>
                             </ul>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link branco" href="{% url 'cadastrar-venda' %}"><i class="bi bi-cash-coin"></i> Venda</a>
-                        </li>
-                        <!-- <li class="nav-item">
-                            <a class="nav-link branco" href="{% url 'venda' %}"><i class="bi bi-cart3"></i> Vender</a>
-                        </li> -->
                         {% endif %}                        
                     </ul>
                     {% if request.user.is_authenticated %}

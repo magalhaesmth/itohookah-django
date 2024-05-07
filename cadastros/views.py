@@ -1,8 +1,10 @@
-from cadastros.forms import VendaForm
-from .models import Categoria, Cliente, Fabricante, Fornecedor, Funcionario, Marca, Produto, Venda
+from typing import Any, Dict
+from .models import Categoria, Cliente, Fabricante, Fornecedor, Funcionario, Marca, Produto, Pedido, Carrinho, ProdutoPedido
 from django.urls import reverse_lazy
 from django.http import JsonResponse
 from django.shortcuts import render
+from dal import autocomplete
+from .forms import PedidoForms, ProdutoForms
 
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.views.generic.list import ListView
@@ -82,17 +84,57 @@ class ProdutoCreate(LoginRequiredMixin, SuccessMessageMixin, CreateView):
     extra_context = {"titulo": "Cadastro de Produto"}
     success_message = "Produto %(nome)s foi cadastrado com sucesso!"
 
-class VendaCreate(LoginRequiredMixin, SuccessMessageMixin, CreateView):
-    model = Venda
-    form_class = VendaForm
-    template_name = "cadastros/form-cadastros.html"
-    success_url = reverse_lazy("listar-venda")
-    extra_context = {"titulo": "Venda"}
+class PedidoCreate(LoginRequiredMixin, CreateView):
+    form_class = PedidoForms
+    template_name = "cadastros/form-pedido.html"
+    success_url = reverse_lazy("listar-pedido")
+    extra_context = {"titulo": "Cadastro de Pedido"}
 
     def form_valid(self, form):
-        form.instance.cadastrado_por = self.request.user
+        form.instance.valor_total = 0.0
+
+        # cria a venda no banco e o object
         url = super().form_valid(form)
+
+        # faz um select em todos os produtos do carirnho
+        produtos_pedido = Carrinho.objects.all()
+        valor_total = 0.0
+
+        if (produtos_pedido.count() == 0):
+            form.add_error("", "Seu carrinho de compras está vazio!")
+            return super().form_invalid(form)
+
+        for i in produtos_pedido:
+            valor_total += (float(i.produto.valor) * i.quantidade)
+
+            ProdutoPedido.objects.create(
+                produto=i.produto,
+                pedido=self.object,
+                preco=i.produto.valor * i.quantidade,
+                quantidade=i.quantidade
+            )
+
+            i.delete()
+
+        self.object.valor_total = valor_total
+        self.object.save()
+
         return url
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+
+        context["carrinho"] = Carrinho.objects.all()
+
+        return context
+
+
+class CarrinhoCreate(LoginRequiredMixin, CreateView):
+    model = Carrinho
+    fields = ["produto", "quantidade"]
+    template_name = "cadastros/form-cadastros.html"
+    success_url = reverse_lazy("listar-carrinho")
+    extra_context = {"titulo": "Adicionar item ao Carrinho"}
 
 
 #######################################################################################
@@ -146,12 +188,11 @@ class ProdutoUpdate(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
     success_url = reverse_lazy("listar-produto")
     success_message = "Produto %(nome)s foi atualizado com sucesso!"
 
-class VendaUpdate(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
-    model = Venda
-    fields = ["produto", "cliente", "quantidade"]
+class CarrinhoUpdate(LoginRequiredMixin, UpdateView):
+    model = Carrinho
+    fields = ["produto", "quantidade"]
     template_name = "cadastros/form-cadastros.html"
-    success_url = reverse_lazy("listar-venda")
-
+    success_url = reverse_lazy("listar-carrinho")
 
 ######################################################################################
 
@@ -190,11 +231,15 @@ class ProdutoDelete(LoginRequiredMixin, DeleteView):
     template_name = "cadastros/delete.html"
     success_url = reverse_lazy("listar-produto")
 
-class VendaDelete(LoginRequiredMixin, DeleteView):  
-    model = Venda
+class PedidoDelete(LoginRequiredMixin, DeleteView):
+    model = Pedido
     template_name = "cadastros/delete.html"
-    success_url = reverse_lazy("listar-venda")
+    success_url = reverse_lazy("listar-pedido")
 
+class CarrinhoDelete(LoginRequiredMixin, DeleteView):
+    model = Carrinho
+    template_name = "cadastros/delete.html"
+    success_url = reverse_lazy("listar-carrinho")
 
 ######################################################################################
 
@@ -239,12 +284,35 @@ class ProdutoList(LoginRequiredMixin, ListView):
     def get_queryset(self):
         return Produto.objects.select_related('marca__fornecedor', 'categoria').all()
 
-class VendaList(LoginRequiredMixin, ListView):
-    model = Venda
-    template_name = "cadastros/list/venda.html"
+class PedidoList(LoginRequiredMixin, ListView):
+    model = Pedido
+    template_name = "cadastros/list/pedido.html"
+    paginate_by = 50
+
+    # Melhora no desempenho da consulta, isso é um INNER JOIN no atributo CLIENTE
+    def get_queryset(self):
+        return Pedido.objects.all().select_related("cliente")
+
+
+class CarrinhoList(LoginRequiredMixin, ListView):
+    model = Carrinho
+    template_name = "cadastros/list/carrinho.html"
+    paginate_by = 50
+
+
+class ProdutoPedidoList(LoginRequiredMixin, ListView):
+    model: ProdutoPedido
+    template_name = "cadastros/list/produto-pedido.html"
 
     def get_queryset(self):
-        return Venda.objects.select_related('produto', 'cliente').all()
+        return ProdutoPedido.objects.filter(pedido__pk=self.kwargs["pk_pedido"])
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+
+        context["pedido"] = Pedido.objects.get(pk=self.kwargs["pk_pedido"])
+
+        return context
 
 ######################################################################################
 
@@ -276,10 +344,6 @@ class ProdutoDetail(LoginRequiredMixin, DetailView):
     model = Produto
     template_name = "cadastros/detail/produto.html"
 
-class VendaDetail(LoginRequiredMixin, DetailView):
-    model = Venda
-    template_name = "cadastros/detail/venda.html"
-
 #############################################################################################
 # Ajax
 
@@ -288,5 +352,16 @@ def listar_produtos(request):
     data = [{'codigo': produto.codigo, 'nome': produto.nome, 'valor': str(produto.valor), 'quantidade': produto.quantidade, 'fornecedor': produto.fornecedor.nome, 'marca': produto.marca.nome, 'categoria': produto.categoria.nome} for produto in produtos]
     return JsonResponse({'produtos': data})
 
-def venda(request):
-    return render(request, 'cadastros/venda.html')
+######################################## AUTOCOMPLETE ########################################
+
+
+class ClienteAutocomplete(LoginRequiredMixin, autocomplete.Select2QuerySetView):
+    def get_queryset(self):
+        object_list = Cliente.objects.all()
+
+        if self.q:
+            object_list = object_list.filter(
+                nome__icontains=self.q
+            )
+
+        return object_list

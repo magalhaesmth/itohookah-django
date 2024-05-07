@@ -1,7 +1,7 @@
 from django.views.generic import TemplateView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from datetime import datetime
-from cadastros.models import Categoria, Cliente, Fabricante, Fornecedor, Funcionario, Marca, Produto, Venda
+from cadastros.models import Categoria, Cliente, Fabricante, Fornecedor, Funcionario, Marca, Produto
 
 class IndexView(LoginRequiredMixin, TemplateView):
     template_name = "paginas/index.html"
