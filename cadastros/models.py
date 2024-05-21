@@ -93,7 +93,6 @@ class Produto(models.Model):
         return f"Nome: {self.nome} | R${self.valor} | Código: {self.codigo} | Marca: {self.marca}"
     
 class Pedido(models.Model):
-    ciclo = models.IntegerField(verbose_name="Ciclo")
     cliente = models.ForeignKey(
         Cliente, on_delete=models.PROTECT, help_text="Selecione um Cliente")
     valor_total = models.DecimalField(

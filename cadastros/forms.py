@@ -13,7 +13,7 @@ class ProdutoForms(forms.ModelForm):
 class PedidoForms(forms.ModelForm):
     class Meta:
         model = Pedido
-        fields = ["ciclo", "cliente"]
+        fields = ["cliente"]
         widgets = {
             'cliente': autocomplete.ModelSelect2(
                 url='buscar-cliente',
