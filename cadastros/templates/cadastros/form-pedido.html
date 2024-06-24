@@ -28,13 +28,19 @@
                 <td>{{ obj.produto.nome }}</td>
                 <td>{{ obj.quantidade }}</td>
                 <td>{{ obj.produto.valor }}</td>
-                <td>{{ obj.quantidade|valor_total_item_carrinho:obj.produto.valor }}</td>
+                <td>R${{ obj.quantidade|valor_total_item_carrinho:obj.produto.valor }}</td>
             </tr>
             {% empty %}
             <tr>
                 <th colspan="100%">Nenhum item adicionado ao Carrinho de Compras.</th>
             </tr>
             {% endfor %}
+            <tr>
+                <td colspan="2"><strong>Total</strong></td>
+                <td><strong>{{ total_itens }}</strong></td>
+                <td></td>
+                <td><strong>R${{ valor_total }}</strong></td>
+            </tr>
         </tbody>
     </table>
 </div>

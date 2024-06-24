@@ -123,8 +123,13 @@ class PedidoCreate(LoginRequiredMixin, CreateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-
-        context["carrinho"] = Carrinho.objects.all()
+        carrinho = Carrinho.objects.all()
+        total_itens = sum(item.quantidade for item in carrinho)
+        valor_total = sum(item.quantidade * item.produto.valor for item in carrinho)
+        
+        context["carrinho"] = carrinho
+        context["total_itens"] = total_itens
+        context["valor_total"] = valor_total
 
         return context
 
@@ -301,7 +306,7 @@ class CarrinhoList(LoginRequiredMixin, ListView):
 
 
 class ProdutoPedidoList(LoginRequiredMixin, ListView):
-    model: ProdutoPedido
+    model = ProdutoPedido
     template_name = "cadastros/list/produto-pedido.html"
 
     def get_queryset(self):
@@ -309,8 +314,16 @@ class ProdutoPedidoList(LoginRequiredMixin, ListView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-
-        context["pedido"] = Pedido.objects.get(pk=self.kwargs["pk_pedido"])
+        
+        pedido = Pedido.objects.get(pk=self.kwargs["pk_pedido"])
+        produtos_pedido = self.get_queryset()
+        
+        total_itens = sum(item.quantidade for item in produtos_pedido)
+        valor_total = sum(item.preco for item in produtos_pedido)
+        
+        context["pedido"] = pedido
+        context["total_itens"] = total_itens
+        context["valor_total"] = valor_total
 
         return context
 
