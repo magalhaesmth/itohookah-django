@@ -8,7 +8,7 @@ class ProdutoForms(forms.ModelForm):
 
     class Meta:
         model = Produto
-        fields = ["nome", "preco", "codigo", "marca"]
+        fields = ["nome", "preco", "marca"]
     
 class PedidoForms(forms.ModelForm):
     class Meta:

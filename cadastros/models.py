@@ -74,7 +74,6 @@ class Funcionario(models.Model):
         return f"Nome: {self.nome} | Função: {self.funcao}"
     
 class Produto(models.Model):
-    codigo = models.IntegerField(verbose_name="Código")
     nome = models.CharField(max_length=50)
     valor = models.DecimalField(
         decimal_places=2, max_digits=9, verbose_name="Valor")
@@ -90,7 +89,7 @@ class Produto(models.Model):
     atualizado_em = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return f"Nome: {self.nome} | R${self.valor} | Código: {self.codigo} | Marca: {self.marca}"
+        return f"Nome: {self.nome} | R${self.valor} |  Marca: {self.marca}"
     
 class Pedido(models.Model):
     cliente = models.ForeignKey(
