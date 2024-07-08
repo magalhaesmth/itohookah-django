@@ -10,11 +10,16 @@
     {{ titulo|default:"Formulário de cadastro e edição" }}
 </h3>
 
-<form action="" method="post">
+<form action="" method="post" enctype="multipart/form-data">
     {% csrf_token %}
 
     {{form|crispy}}
 
+    <button type="button" class="btn btn-secondary" onclick="history.back();">
+        <i class="bi bi-arrow-left"></i>
+        Voltar
+    </button>
+    
     <button type="submit" class="btn btn-success">
         <i class="bi bi-check-lg"></i>
         Salvar
