@@ -15,6 +15,9 @@ pip install crispy-bootstrap5
 ```bash
 pip install django-debug-toolbar
 ```
+```bash
+pip install Pillow
+```
 
 ## Diagrama de Classes
 

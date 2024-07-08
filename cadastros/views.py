@@ -78,7 +78,7 @@ class FuncionarioCreate(LoginRequiredMixin, SuccessMessageMixin, CreateView):
 
 class ProdutoCreate(LoginRequiredMixin, SuccessMessageMixin, CreateView):
     model = Produto
-    fields = ["nome", "valor", "quantidade", "fornecedor", "marca", "categoria"]
+    fields = ["nome", "valor", "quantidade", "fornecedor", "marca", "categoria", "imagem"]
     template_name = "cadastros/form-cadastros.html"
     success_url = reverse_lazy("listar-produto")
     extra_context = {"titulo": "Cadastro de Produto"}
@@ -188,7 +188,7 @@ class FuncionarioUpdate(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
 
 class ProdutoUpdate(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
     model = Produto
-    fields = ["nome", "valor", "quantidade", "fornecedor", "marca", "categoria"]
+    fields = ["nome", "valor", "quantidade", "fornecedor", "marca", "categoria", "imagem"]
     template_name = "cadastros/form-cadastros.html"
     success_url = reverse_lazy("listar-produto")
     success_message = "Produto %(nome)s foi atualizado com sucesso!"

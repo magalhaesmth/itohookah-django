@@ -17,49 +17,48 @@
 
 <hr>
 
-<div class="table-responsive-lg">
-    <table class="table table-striped">
-        <thead>
-            <tr>
-                <th>Nome</th>
-                <th>Quantidade</th>
-                <th>Categoria</th>
-                <th>Fornecedor</th>
-                <th>Marca</th>
-                <th>Valor</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for obj in object_list %}
-            <tr class="">
-                <td>{{ obj.nome }}</td>
-                <td>{{ obj.quantidade }} unidades</td>
-                <td>{{ obj.categoria }}</td>
-                <td>{{ obj.fornecedor.nome }}</td>
-                <td>{{ obj.marca }}</td>
-                <td>R${{ obj.valor }}</td>
-                <td>
-                    <div class="dropdown">
-                        <a class="btn btn-sm btn-outline-secondary dropdown-toggle" href="#" role="button"
-                            data-bs-toggle="dropdown" aria-expanded="false">
-                            <i class="bi bi-gear"></i>
-                        </a>
-                        <ul class="dropdown-menu">
-                            <li><a class="dropdown-item text-primary" href="{% url 'editar-produto' obj.pk %}">
-                                    <i class="bi bi-pencil-square"></i> Editar</a></li>
-                            <li><a class="dropdown-item text-danger" href="{% url 'excluir-produto' obj.pk %}">
-                                    <i class="bi bi-trash"></i> Excluir</a></li>
-                        </ul>
-                    </div>
-                </td>
-            </tr>
-            {% empty %}
-            <tr>
-                <th colspan="100%">Nenhum registro encontrado.</th>
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
+<div class="row">
+    {% for obj in object_list %}
+    <div class="col-md-4">
+        <div class="card mb-4">
+            <div class="card-body text-center">
+                {% if obj.imagem %}
+                <img src="{{ obj.imagem.url }}" alt="{{ obj.nome }}" class="img-fluid mb-3" style="max-width: 100px;">
+                {% else %}
+                <img src="{% static 'img/sem-imagem.png' %}" alt="Imagem Padrão" class="img-fluid mb-3" style="max-width: 100px;">
+                {% endif %}
+                <h5 class="card-title">{{ obj.nome }}</h5>
+                <p class="card-text">
+                    <strong>Quantidade:</strong> 
+                    {{ obj.quantidade }} 
+                    {{ obj.quantidade|pluralize:"unidade,unidades" }}
+                </p>
+                <p class="card-text"><strong>Categoria:</strong> {{ obj.categoria }}</p>
+                <p class="card-text"><strong>Fornecedor:</strong> {{ obj.fornecedor.nome }}</p>
+                <p class="card-text"><strong>Marca:</strong> {{ obj.marca }}</p>
+                <p class="card-text"><strong>Valor:</strong> R${{ obj.valor }}</p>
+                <div class="dropdown">
+                    <a class="btn btn-sm btn-outline-secondary dropdown-toggle" href="#" role="button"
+                        data-bs-toggle="dropdown" aria-expanded="false">
+                        <i class="bi bi-gear"></i>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item text-primary" href="{% url 'editar-produto' obj.pk %}">
+                                <i class="bi bi-pencil-square"></i> Editar</a></li>
+                        <li><a class="dropdown-item text-danger" href="{% url 'excluir-produto' obj.pk %}">
+                                <i class="bi bi-trash"></i> Excluir</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% empty %}
+    <div class="col-12">
+        <div class="alert alert-warning" role="alert">
+            Nenhum registro encontrado.
+        </div>
+    </div>
+    {% endfor %}
 </div>
 
 {% endblock %}

@@ -84,6 +84,7 @@ class Produto(models.Model):
         Marca, on_delete=models.PROTECT, help_text="Selecione a marca")
     categoria = models.ForeignKey(
         Categoria, on_delete=models.PROTECT, help_text="Selecione a categoria")
+    imagem = models.ImageField(upload_to='imagens/', blank=True, null=True, verbose_name="Imagem")
 
     cadastrado_em = models.DateTimeField(auto_now_add=True)
     atualizado_em = models.DateTimeField(auto_now=True)
