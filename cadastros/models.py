@@ -11,7 +11,7 @@ class Fornecedor(models.Model):
     atualizado_em = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return f"Nome: {self.nome} | CNPJ: ({self.documento})"
+        return f"{self.nome}"
     
 class Fabricante(models.Model):
     nome = models.CharField(max_length=50)
