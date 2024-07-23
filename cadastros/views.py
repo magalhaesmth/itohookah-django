@@ -1,10 +1,9 @@
-from typing import Any, Dict
 from .models import Categoria, Cliente, Fabricante, Fornecedor, Funcionario, Marca, Produto, Pedido, Carrinho, ProdutoPedido
 from django.urls import reverse_lazy
 from django.http import JsonResponse
 from django.shortcuts import render
 from dal import autocomplete
-from .forms import PedidoForms, ProdutoForms
+from .forms import PedidoForms, ProdutoFilterForm, ProdutoForms
 
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.views.generic.list import ListView
@@ -288,6 +287,24 @@ class ProdutoList(LoginRequiredMixin, ListView):
 
     def get_queryset(self):
         return Produto.objects.select_related('marca__fornecedor', 'categoria').all()
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        form = ProdutoFilterForm(self.request.GET)
+        context['filter_form'] = form
+        return context
+    
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        form = ProdutoFilterForm(self.request.GET)
+        if form.is_valid():
+            if form.cleaned_data.get('nome'):
+                queryset = queryset.filter(nome__icontains=form.cleaned_data['nome'])
+            if form.cleaned_data.get('categoria'):
+                queryset = queryset.filter(categoria=form.cleaned_data['categoria'])
+            if form.cleaned_data.get('fornecedor'):
+                queryset = queryset.filter(fornecedor=form.cleaned_data['fornecedor'])
+        return queryset
 
 class PedidoList(LoginRequiredMixin, ListView):
     model = Pedido

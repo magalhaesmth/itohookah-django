@@ -1,6 +1,6 @@
 from dal import autocomplete
 from django import forms
-from .models import Pedido, Produto
+from .models import Pedido, Produto, Categoria, Fornecedor
 
 
 class ProdutoForms(forms.ModelForm):
@@ -23,3 +23,8 @@ class PedidoForms(forms.ModelForm):
                 },
             )
         }
+
+class ProdutoFilterForm(forms.Form):
+    nome = forms.CharField(required=False, label='Nome')
+    categoria = forms.ModelChoiceField(queryset=Categoria.objects.all(), required=False, label='Categoria')
+    fornecedor = forms.ModelChoiceField(queryset=Fornecedor.objects.all(), required=False, label='Fornecedor')

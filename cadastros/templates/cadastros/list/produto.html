@@ -4,14 +4,48 @@
 
 {% block conteudo %}
 <div class="row justify-content-center align-items-center mt-3">
-    <div class="col-md-8">
+    <div class="col-md-12">
         <h3 class="">Lista de Produtos</h3>
     </div>
-    <div class="col-md">
-        <a href="{% url 'cadastrar-produto' %}" class="btn btn-primary btn-sm">
-            <i class="bi bi-plus-lg"></i>
-            Cadastrar Produto
-        </a>
+</div>
+
+<!-- Formulário de Filtro -->
+<div class="row mt-3">
+    <div class="col-md-12">
+        <form method="GET" class="d-flex">
+            <div class="row flex-grow-1">
+                <div class="col-md-3">
+                    <input type="text" name="nome" class="form-control" placeholder="Nome" value="{{ request.GET.nome }}">
+                </div>
+                <div class="col-md-3">
+                    <select name="categoria" class="form-control">
+                        <option value="">Categoria</option>
+                        {% for categoria in filter_form.fields.categoria.queryset %}
+                        <option value="{{ categoria.pk }}" {% if categoria.pk == request.GET.categoria %}selected{% endif %}>
+                            {{ categoria }}
+                        </option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="col-md-3">
+                    <select name="fornecedor" class="form-control">
+                        <option value="">Fornecedor</option>
+                        {% for fornecedor in filter_form.fields.fornecedor.queryset %}
+                        <option value="{{ fornecedor.pk }}" {% if fornecedor.pk == request.GET.fornecedor %}selected{% endif %}>
+                            {{ fornecedor }}
+                        </option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="col-md-3 d-flex align-items-center justify-content-end">
+                    <button type="submit" class="btn btn-primary me-2">Filtrar</button>
+                    <a href="{% url 'cadastrar-produto' %}" class="btn btn-success d-flex align-items-center">
+                        <i class="bi bi-plus-lg me-1"></i>
+                        Cadastrar Produto
+                    </a>
+                </div>
+            </div>
+        </form>
     </div>
 </div>
 
