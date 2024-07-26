@@ -1,7 +1,7 @@
 from .models import Categoria, Cliente, Fabricante, Fornecedor, Funcionario, Marca, Produto, Pedido, Carrinho, ProdutoPedido
 from django.urls import reverse_lazy
 from django.http import JsonResponse
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from dal import autocomplete
 from .forms import PedidoForms, ProdutoFilterForm, ProdutoForms
 
@@ -92,16 +92,25 @@ class PedidoCreate(LoginRequiredMixin, CreateView):
     def form_valid(self, form):
         form.instance.valor_total = 0.0
 
-        # cria a venda no banco e o object
-        url = super().form_valid(form)
-
-        # faz um select em todos os produtos do carirnho
+         # Faz um select em todos os produtos do carirnho
         produtos_pedido = Carrinho.objects.all()
         valor_total = 0.0
 
         if (produtos_pedido.count() == 0):
             form.add_error("", "Seu carrinho de compras está vazio!")
             return super().form_invalid(form)
+
+        semestoque = []
+        for i in produtos_pedido:
+            if(i.quantidade>i.produto.quantidade):
+                semestoque.append(f"{i.produto.nome} ({i.produto.quantidade})")
+
+        if(len(semestoque)>0):
+            form.add_error("", f"Estoque indisponível para: {str(semestoque)}")
+            return super().form_invalid(form)
+
+        # Cria a venda no banco e o object
+        url = super().form_valid(form)
 
         for i in produtos_pedido:
             valor_total += (float(i.produto.valor) * i.quantidade)
@@ -112,6 +121,9 @@ class PedidoCreate(LoginRequiredMixin, CreateView):
                 preco=i.produto.valor * i.quantidade,
                 quantidade=i.quantidade
             )
+
+            i.produto.quantidade-=i.quantidade
+            i.produto.save()
 
             i.delete()
 
@@ -139,6 +151,21 @@ class CarrinhoCreate(LoginRequiredMixin, CreateView):
     template_name = "cadastros/form-cadastros.html"
     success_url = reverse_lazy("listar-carrinho")
     extra_context = {"titulo": "Adicionar item ao Carrinho"}
+
+    def form_valid(self, form):
+        item = Carrinho.objects.filter(produto = form.instance.produto)
+        if(item.exists()):
+            item[0].quantidade += form.instance.quantidade
+            item[0].save()
+            
+            return redirect(self.success_url)
+        
+        if(form.instance.produto.quantidade < form.instance.quantidade):
+            form.add_error("produto", "Este produto não possui a quantidade desejada!")
+            form.add_error("quantidade", f"O produto {form.instance.produto.nome} possui em estoque: {form.instance.produto.quantidade}")
+            return super().form_invalid(form)
+        
+        return super().form_valid(form)
 
 
 #######################################################################################
