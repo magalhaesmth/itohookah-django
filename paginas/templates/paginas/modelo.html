@@ -94,9 +94,6 @@
                         <li class="nav-item">
                             <a class="nav-link branco" href="{% url 'sobre' %}"><i class="bi bi-filter"></i> Sobre</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link branco" href="{% url 'registrar' %}"><i class="bi bi-person-add"></i> Novo Usuário</a>
-                        </li>
                         <!-- <li class="nav-item">
                             <a class="nav-link branco" href="{% url 'relatorios' %}"><i class="bi bi-clipboard2"></i> Relatórios</a>
                         </li> -->
@@ -105,17 +102,18 @@
                                 <i class="bi bi-card-list"></i> Listagem
                             </a>
                             <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="{% url 'listar-fornecedor' %}">Fornecedor</a></li>
-                                <li><a class="dropdown-item" href="{% url 'listar-fabricante' %}">Fabricante</a></li>
-                                <li><a class="dropdown-item" href="{% url 'listar-marca' %}">Marca</a></li>
-                                <li><a class="dropdown-item" href="{% url 'listar-categoria' %}">Categoria</a></li>
+                                <li><a class="dropdown-item" href="{% url 'listar-cliente' %}"><i class="bi bi-person"></i> Cliente</a></li>
+                                <li><a class="dropdown-item" href="{% url 'listar-produto' %}"><i class="bi bi-box2"></i> Produto</a></li>
+                                <li><a class="dropdown-item" href="{% url 'listar-pedido' %}"><i class="bi bi-basket"></i> Pedido</a>
+                                <li><a class="dropdown-item" href="{% url 'listar-carrinho' %}"><i class="bi bi-cart3"></i> Carrinho</a>
+
                                 <li><hr class="dropdown-divider"></li>
-                                
-                                <li><a class="dropdown-item" href="{% url 'listar-cliente' %}">Cliente</a></li>
-                                <li><a class="dropdown-item" href="{% url 'listar-funcionario' %}">Funcionario</a></li>
-                                <li><a class="dropdown-item" href="{% url 'listar-produto' %}">Produto</a></li>
-                                <li><a class="dropdown-item" href="{% url 'listar-pedido' %}">Pedido</a>
-                                <li><a class="dropdown-item" href="{% url 'listar-carrinho' %}">Carrinho</a>
+
+                                <li><a class="dropdown-item" href="{% url 'listar-fornecedor' %}"><i class="bi bi-box-seam"></i> Fornecedor</a></li>
+                                <li><a class="dropdown-item" href="{% url 'listar-fabricante' %}"><i class="bi bi-buildings"></i> Fabricante</a></li>
+                                <li><a class="dropdown-item" href="{% url 'listar-marca' %}"><i class="bi bi-c-circle"></i> Marca</a></li>
+                                <li><a class="dropdown-item" href="{% url 'listar-categoria' %}"><i class="bi bi-columns"></i> Categoria</a></li>
+                                <!-- <li><a class="dropdown-item" href="{% url 'listar-funcionario' %}">Funcionario</a></li> -->
                                 </li>
                             </ul>
                         </li>
@@ -125,17 +123,19 @@
                                 <i class="bi bi-clipboard-plus"></i> Cadastros
                             </a>
                             <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="{% url 'cadastrar-fornecedor' %}">Fornecedor</a></li>
-                                <li><a class="dropdown-item" href="{% url 'cadastrar-fabricante' %}">Fabricante</a></li>
-                                <li><a class="dropdown-item" href="{% url 'cadastrar-marca' %}">Marca</a></li>
-                                <li><a class="dropdown-item" href="{% url 'cadastrar-categoria' %}">Categoria</a></li>
+                                <li><a class="dropdown-item" href="{% url 'registrar' %}"><i class="bi bi-person-add"></i> Usuário</a></li>
+                                <li><a class="dropdown-item" href="{% url 'cadastrar-cliente' %}"><i class="bi bi-person"></i> Cliente</a></li>
+                                <li><a class="dropdown-item" href="{% url 'cadastrar-produto' %}"><i class="bi bi-box2"></i> Produto</a></li>
+                                <li><a class="dropdown-item" href="{% url 'cadastrar-pedido' %}"><i class="bi bi-basket"></i> Pedido</a></li>
+                                <li><a class="dropdown-item" href="{% url 'cadastrar-carrinho' %}"><i class="bi bi-cart3"></i> Carrinho</a></li>
+
                                 <li><hr class="dropdown-divider"></li>
 
-                                <li><a class="dropdown-item" href="{% url 'cadastrar-cliente' %}">Cliente</a></li>
-                                <li><a class="dropdown-item" href="{% url 'cadastrar-funcionario' %}">Funcionario</a></li>
-                                <li><a class="dropdown-item" href="{% url 'cadastrar-produto' %}">Produto</a></li>
-                                <li><a class="dropdown-item" href="{% url 'cadastrar-pedido' %}">Pedido</a>
-                                <li><a class="dropdown-item" href="{% url 'cadastrar-carrinho' %}">Carrinho</a>
+                                <li><a class="dropdown-item" href="{% url 'cadastrar-fornecedor' %}"><i class="bi bi-box-seam"></i> Fornecedor</a></li>
+                                <li><a class="dropdown-item" href="{% url 'cadastrar-fabricante' %}"><i class="bi bi-buildings"></i> Fabricante</a></li>
+                                <li><a class="dropdown-item" href="{% url 'cadastrar-marca' %}"><i class="bi bi-c-circle"></i> Marca</a></li>
+                                <li><a class="dropdown-item" href="{% url 'cadastrar-categoria' %}"><i class="bi bi-columns"></i> Categoria</a></li>
+                                <!-- <li><a class="dropdown-item" href="{% url 'cadastrar-funcionario' %}">Funcionario</a></li> -->
                             </ul>
                         </li>
                         {% endif %}                        
