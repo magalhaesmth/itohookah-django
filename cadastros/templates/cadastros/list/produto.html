@@ -9,6 +9,17 @@
     </div>
 </div>
 
+<style>
+    .img-padrao {
+    width: 100px;
+    height: 100px;
+    object-fit: cover; /* Ajusta a imagem para cobrir a área definida sem distorcer */
+    }
+    .card-text {
+        text-align: left;
+    }
+</style>
+
 <!-- Formulário de Filtro -->
 <div class="row mt-3">
     <div class="col-md-12">
@@ -51,37 +62,40 @@
 
 <hr>
 
+<!-- Listagem dos produtos -->
 <div class="row">
     {% for obj in object_list %}
-    <div class="col-md-4">
+    <div class="col-md-3">
         <div class="card mb-4">
             <div class="card-body text-center">
                 {% if obj.imagem %}
-                <img src="{{ obj.imagem.url }}" alt="{{ obj.nome }}" class="img-fluid mb-3" style="max-width: 100px;">
+                <img src="{{ obj.imagem.url }}" alt="{{ obj.nome }}" class="img-fluid mb-3 img-padrao">
                 {% else %}
-                <img src="{% static 'img/sem-imagem.png' %}" alt="Imagem Padrão" class="img-fluid mb-3" style="max-width: 100px;">
+                <img src="{% static 'img/sem-imagem.png' %}" alt="Imagem Padrão" class="img-fluid mb-3 img-padrao">                
                 {% endif %}
                 <h5 class="card-title">{{ obj.nome }}</h5>
+                <p class="card-text"><strong>Categoria:</strong> {{ obj.categoria }}</p>
+                <!-- <p class="card-text"><strong>Fornecedor:</strong> {{ obj.fornecedor.nome }}</p> -->
+                <p class="card-text"><strong>Marca:</strong> {{ obj.marca }}</p>
                 <p class="card-text">
-                    <strong>Quantidade:</strong> 
+                    <strong>Estoque:</strong> 
                     {{ obj.quantidade }} 
                     {{ obj.quantidade|pluralize:"unidade,unidades" }}
                 </p>
-                <p class="card-text"><strong>Categoria:</strong> {{ obj.categoria }}</p>
-                <p class="card-text"><strong>Fornecedor:</strong> {{ obj.fornecedor.nome }}</p>
-                <p class="card-text"><strong>Marca:</strong> {{ obj.marca }}</p>
                 <p class="card-text"><strong>Valor:</strong> R${{ obj.valor }}</p>
-                <div class="dropdown">
-                    <a class="btn btn-sm btn-outline-secondary dropdown-toggle" href="#" role="button"
-                        data-bs-toggle="dropdown" aria-expanded="false">
-                        <i class="bi bi-gear"></i>
-                    </a>
-                    <ul class="dropdown-menu">
-                        <li><a class="dropdown-item text-primary" href="{% url 'editar-produto' obj.pk %}">
-                                <i class="bi bi-pencil-square"></i> Editar</a></li>
-                        <li><a class="dropdown-item text-danger" href="{% url 'excluir-produto' obj.pk %}">
-                                <i class="bi bi-trash"></i> Excluir</a></li>
-                    </ul>
+                <div class="d-flex justify-content-end">
+                    <div class="dropdown">
+                        <a class="btn btn-sm btn-outline-secondary dropdown-toggle" href="#" role="button"
+                            data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="bi bi-gear"></i>
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end">
+                            <li><a class="dropdown-item text-primary" href="{% url 'editar-produto' obj.pk %}">
+                                    <i class="bi bi-pencil-square"></i> Editar</a></li>
+                            <li><a class="dropdown-item text-danger" href="{% url 'excluir-produto' obj.pk %}">
+                                    <i class="bi bi-trash"></i> Excluir</a></li>
+                        </ul>
+                    </div>
                 </div>
             </div>
         </div>

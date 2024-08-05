@@ -5,4 +5,4 @@
 - [ ] Tela de pedido e fechamento do carrinho unificada
 - [X] Diminuir quantidade do produto da venda
 - [ ] Tela de produtos deixar as imagens no mesmo tamanho
-- [ ] Django Filter
+- [ ] Django Filter ou filtos nas listagens
