@@ -2,16 +2,17 @@
 
 {% load static %}
 
-<!-- Carrega os filtros -->
 {% load meus_filtros %}
 
 {% block conteudo %}
+
+{% load crispy_forms_tags %}
 
 <div class="row justify-content-center align-items-center mt-3">
     <div class="col-md">
         <h3 class="">Pedido: {{ pedido.pk }}</h3>
         <h5 class="">Cliente: {{ pedido.cliente.nome }}</h3>
-        <h6 class="">CPF: {{ pedido.cliente.cpf }}</h3>
+        <h6 class="">CPF/CNPJ: {{ pedido.cliente.cpfCnpj }}</h3>
     </div>
 </div>
 
@@ -32,8 +33,8 @@
             <tr class="">
                 <td>{{ obj.produto.nome }}</td>
                 <td>{{ obj.quantidade }}</td>
-                <td>{{ obj.produto.valor }}</td>
-                <td>{{ obj.quantidade|valor_total_item_carrinho:obj.produto.valor }}</td>
+                <td>R${{ obj.produto.valor }}</td>
+                <td>R${{ obj.quantidade|valor_total_item_carrinho:obj.produto.valor }}</td>
             </tr>
             {% endfor %}
             <tr>
@@ -45,5 +46,19 @@
         </tbody>
     </table>
 </div>
+
+<div class="d-flex justify-content-end">
+    <form action="" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+
+        {{ form|crispy }}
+
+        <button type="button" class="btn btn-warning" onclick="history.back();">
+            <i class="bi bi-arrow-left"></i>
+            Voltar
+        </button>
+    </form>
+</div>
+
 
 {% endblock %}
