@@ -18,7 +18,7 @@ class PedidoForms(forms.ModelForm):
             'cliente': autocomplete.ModelSelect2(
                 url='buscar-cliente',
                 attrs={
-                    'data-placeholder': 'Informe o nome do Cliente...',
+                    'data-placeholder': 'Informe o nome do cliente...',
                     'data-minimum-input-length': 3,
                 },
             )

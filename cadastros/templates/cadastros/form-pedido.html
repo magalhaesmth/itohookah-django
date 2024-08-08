@@ -2,13 +2,16 @@
 
 {% load static %}
 
-<!-- Carrega os filtros -->
+<!-- Carrega o filtro de multiplicacao do valor total -->
 {% load meus_filtros %}
 
 {% load crispy_forms_tags %}
 
 {% block conteudo %}
-<h1 class="mt-5">{{titulo|default:"Formulário"}}</h1>
+<h3 class="mt-3 border-bottom mb-4 pb-2">{{titulo|default:"Formulário"}}</h3>
+
+<!-- Campo de selecionar o cliente -->
+{{ form|crispy }}
 
 <div class="table-responsive-lg">
     <table class="table table-striped">
@@ -45,11 +48,9 @@
     </table>
 </div>
 
+<!-- Botão de salvar -->
 <form action="" method="post">
     {% csrf_token %}
-
-    {{ form|crispy }}
-
     <button type="submit" class="btn btn-success">{{descricao_botao|default:"Salvar"}}</button>
 </form>
 
