@@ -10,3 +10,4 @@
 - [ ] Criação e correção nas telas de editar de todos
 - [ ] Tela de cadastro personalizada para cada um
 - [X] Trazer o campo de cliente para abaixo do titulo no cadastro de pedido
+- [ ] Campo de desconto (estudar)
