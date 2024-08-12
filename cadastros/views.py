@@ -224,6 +224,7 @@ class CarrinhoUpdate(LoginRequiredMixin, UpdateView):
     fields = ["produto", "quantidade"]
     template_name = "cadastros/form-cadastros.html"
     success_url = reverse_lazy("listar-carrinho")
+    extra_context = {"titulo": "Editar item do carrinho"}
 
 ######################################################################################
 
