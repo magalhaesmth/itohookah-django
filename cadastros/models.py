@@ -94,7 +94,7 @@ class Produto(models.Model):
     
 class Pedido(models.Model):
     cliente = models.ForeignKey(
-        Cliente, on_delete=models.PROTECT, help_text="Selecione um cliente")
+        Cliente, on_delete=models.PROTECT)
     valor_total = models.DecimalField(
         decimal_places=2, max_digits=9, verbose_name="Preço")
 
