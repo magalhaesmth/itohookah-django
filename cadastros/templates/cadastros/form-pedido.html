@@ -10,6 +10,12 @@
 {% block conteudo %}
 <h3 class="mt-3 border-bottom mb-4 pb-2">{{titulo|default:"Formulário"}}</h3>
 
+<style>
+    tr, td {
+        text-align: center;
+    }
+</style>
+
 <!-- Campo de selecionar o cliente -->
 <form action="" method="post">
     {% csrf_token %}
@@ -34,17 +40,33 @@
                 <td>{{ obj.quantidade }}</td>
                 <td>{{ obj.produto.valor }}</td>
                 <td>R${{ obj.quantidade|valor_total_item_carrinho:obj.produto.valor }}</td>
+                <td>
+                    <div class="dropdown">
+                        <a class="btn btn-sm btn-outline-secondary dropdown-toggle" href="#" role="button"
+                            data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="bi bi-gear"></i>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item text-primary" href="{% url 'editar-carrinho' obj.pk %}">
+                                    <i class="bi bi-pencil-square"></i>Editar</a></li>
+                            <li><a class="dropdown-item text-danger" href="{% url 'excluir-carrinho' obj.pk %}">
+                                    <i class="bi bi-trash"></i> Excluir</a></li>
+                        </ul>
+                    </div>
+                </td>
             </tr>
             {% empty %}
             <tr>
-                <th colspan="100%">Nenhum item adicionado ao Carrinho de Compras.</th>
+                <th colspan="100%" style="font-weight: normal; color: red; text-align: center;">Nenhum item adicionado ao Carrinho de Compras.</th>
             </tr>
             {% endfor %}
             <tr>
-                <td colspan="2"><strong>Total</strong></td>
-                <td><strong>{{ total_itens }}</strong></td>
+                <td><strong>Total</strong></td>
+                <td></td>
+                <td>{{ total_itens }}</td>
                 <td></td>
                 <td><strong>R${{ valor_total }}</strong></td>
+                <td></td>
             </tr>
         </tbody>
     </table>

@@ -5,7 +5,7 @@
 {% load crispy_forms_tags %}
 
 {% block conteudo %}
-<h1 class="mt-5">{{titulo|default:"Deseja deletar?"}}</h1>
+<h1 class="mt-5">{{titulo|default:"Deseja excluir?"}}</h1>
 
 <form action="" method="post">
     {% csrf_token %}
@@ -14,6 +14,10 @@
         Tem certeza que deseja excluir este registro: <b>{{object}}</b>
     </p>
 
+    <button type="button" class="btn btn-warning" onclick="history.back();">
+        <i class="bi bi-arrow-left"></i>
+        Voltar
+    </button>
 
     <button type="submit" class="btn btn-danger">Excluir</button>
 </form>

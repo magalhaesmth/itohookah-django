@@ -15,4 +15,4 @@
 
 - [ ] Tela de pedido e fechamento do carrinho unificada
 - [ ] Campo de desconto
-- [ ] Botão de edição do produto no cadastro de pedido
+- [X] Botão de edição do produto no cadastro de pedido

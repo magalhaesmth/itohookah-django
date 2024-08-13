@@ -14,12 +14,12 @@
                 <form method="post">
                     {% csrf_token %}
                     {{ form|crispy }}
+                    <button class="btn btn-dark mt-4 btn-senha" type="button">
+                        <i class="bi bi-eye-slash"></i>
+                    </button>
                     <button type="submit" class="btn btn-success btn-block mt-4">
                         <i class="bi bi-check-lg" style="color: #0f9c0f;"></i>
                         Entrar
-                    </button>
-                    <button class="btn btn-dark mt-4 btn-senha" type="button">
-                        <i class="bi bi-eye-slash"></i>
                     </button>
                 </form>
             </div>
