@@ -21,9 +21,8 @@
     {% csrf_token %}
     {{ form|crispy }}
 
-<hr>
-
 <div class="table-responsive-lg">
+    <h4 class="mt-5 border-bottom mb-4 pb-2">Itens Adicionados</h4>
     <table class="table table-striped">
         <thead>
             <tr>
@@ -76,8 +75,10 @@
 
 <!-- Botão de salvar -->
 
+    <br>
     <button type="submit" class="btn btn-success">{{descricao_botao|default:"Salvar"}}</button>
 </form>
+
 
 {% endblock %}
 

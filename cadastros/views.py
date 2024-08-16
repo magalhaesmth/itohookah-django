@@ -148,8 +148,8 @@ class PedidoCreate(LoginRequiredMixin, CreateView):
 class CarrinhoCreate(LoginRequiredMixin, CreateView):
     model = Carrinho
     fields = ["produto", "quantidade"]
-    template_name = "cadastros/form-cadastros.html"
-    success_url = reverse_lazy("listar-carrinho")
+    template_name = "cadastros/form-pedido.html"
+    success_url = reverse_lazy("cadastrar-pedido")
     extra_context = {"titulo": "Adicionar item ao Carrinho"}
 
     def form_valid(self, form):
@@ -166,6 +166,18 @@ class CarrinhoCreate(LoginRequiredMixin, CreateView):
             return super().form_invalid(form)
         
         return super().form_valid(form)
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        carrinho = Carrinho.objects.all()
+        total_itens = sum(item.quantidade for item in carrinho)
+        valor_total = sum(item.quantidade * item.produto.valor for item in carrinho)
+        
+        context["carrinho"] = carrinho
+        context["total_itens"] = total_itens
+        context["valor_total"] = valor_total
+
+        return context
 
 
 #######################################################################################
@@ -222,9 +234,21 @@ class ProdutoUpdate(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
 class CarrinhoUpdate(LoginRequiredMixin, UpdateView):
     model = Carrinho
     fields = ["produto", "quantidade"]
-    template_name = "cadastros/form-cadastros.html"
-    success_url = reverse_lazy("listar-carrinho")
+    template_name = "cadastros/form-pedido.html"
+    success_url = reverse_lazy("cadastrar-pedido")
     extra_context = {"titulo": "Editar item do carrinho"}
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        carrinho = Carrinho.objects.all()
+        total_itens = sum(item.quantidade for item in carrinho)
+        valor_total = sum(item.quantidade * item.produto.valor for item in carrinho)
+        
+        context["carrinho"] = carrinho
+        context["total_itens"] = total_itens
+        context["valor_total"] = valor_total
+
+        return context
 
 ######################################################################################
 
