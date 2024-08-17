@@ -87,7 +87,7 @@ class PedidoCreate(LoginRequiredMixin, CreateView):
     form_class = PedidoForms
     template_name = "cadastros/form-pedido.html"
     success_url = reverse_lazy("listar-pedido")
-    extra_context = {"titulo": "Cadastro de Pedido"}
+    extra_context = {"titulo": "Fechar Pedido"}
 
     def form_valid(self, form):
         form.instance.valor_total = 0.0
@@ -238,6 +238,12 @@ class CarrinhoUpdate(LoginRequiredMixin, UpdateView):
     success_url = reverse_lazy("cadastrar-pedido")
     extra_context = {"titulo": "Editar item do carrinho"}
 
+    def form_valid(self, form):
+        if form.cleaned_data['quantidade'] <= 0:
+            form.add_error('quantidade', 'A quantidade deve ser maior que 0.')
+            return self.form_invalid(form)
+        return super().form_valid(form)
+
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         carrinho = Carrinho.objects.all()
@@ -249,7 +255,6 @@ class CarrinhoUpdate(LoginRequiredMixin, UpdateView):
         context["valor_total"] = valor_total
 
         return context
-
 ######################################################################################
 
 class FornecedorDelete(LoginRequiredMixin, DeleteView):      
