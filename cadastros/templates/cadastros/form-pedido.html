@@ -76,7 +76,16 @@
 <!-- Botão de salvar -->
 
     <br>
-    <button type="submit" class="btn btn-success float-end">{{descricao_botao|default:"Salvar"}}</button>
+    <div class="col-md-12 d-flex align-items-center justify-content-end">
+        <button type="button" class="btn btn-danger" style="margin-right: 10px;" onclick="history.back();">
+            Voltar
+        </button>
+        <a href="{% url 'cadastrar-carrinho' %}" class="btn btn-primary d-flex align-items-center" style="margin-right: 10px;">
+            Adicionar Produto
+        </a>
+        <button type="submit" class="btn btn-success float-end">{{descricao_botao|default:"Salvar"}}</button>
+    </div>
+    
 
 </form>
 
