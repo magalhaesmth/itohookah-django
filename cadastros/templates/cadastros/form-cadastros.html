@@ -10,16 +10,38 @@
     {{ titulo|default:"Formulário de cadastro e edição" }}
 </h3>
 
+<style>
+    tr, td {
+        text-align: center;
+    }
+    .btn-purple {
+        background-color: #6f42c1; /* Roxo */
+        color: white;
+    }
+    .btn-orange {
+        background-color: #ffbb00; /* Roxo */
+        color: black;
+    }
+    .btn-green {
+        background-color: #3d8b0f; /* Roxo */
+        color: rgb(255, 255, 255);
+    }
+    .btn-grey {
+        background-color: #838383; /* Roxo */
+        color: rgb(255, 255, 255);
+    }
+</style>
+
 <form action="" method="post" enctype="multipart/form-data">
     {% csrf_token %}
 
     {{form|crispy}}
 
-    <button type="submit" class="btn btn-success float-end">
+    <button type="submit" class="btn btn-green float-end">
         Salvar
     </button>
 
-    <button type="button" class="btn btn-danger float-end" style="margin-right: 10px;" onclick="history.back();">
+    <button type="button" class="btn btn-grey float-end" style="margin-right: 10px;" onclick="history.back();">
         Voltar
     </button>
 

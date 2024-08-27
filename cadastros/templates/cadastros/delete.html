@@ -7,6 +7,28 @@
 {% block conteudo %}
 <h1 class="mt-5">{{titulo|default:"Deseja excluir?"}}</h1>
 
+<style>
+    tr, td {
+        text-align: center;
+    }
+    .btn-purple {
+        background-color: #6f42c1; /* Roxo */
+        color: white;
+    }
+    .btn-orange {
+        background-color: #ffbb00; /* Roxo */
+        color: black;
+    }
+    .btn-green {
+        background-color: #3d8b0f; /* Roxo */
+        color: rgb(255, 255, 255);
+    }
+    .btn-grey {
+        background-color: #838383; /* Roxo */
+        color: rgb(255, 255, 255);
+    }
+</style>
+
 <form action="" method="post">
     {% csrf_token %}
 
@@ -14,7 +36,7 @@
         Tem certeza que deseja excluir este registro: <b>{{object}}</b>
     </p>
 
-    <button type="button" class="btn btn-warning" onclick="history.back();">
+    <button type="button" class="btn btn-grey" onclick="history.back();">
         Voltar
     </button>
 
