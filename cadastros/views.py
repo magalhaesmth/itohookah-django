@@ -368,9 +368,21 @@ class PedidoList(LoginRequiredMixin, ListView):
     template_name = "cadastros/list/pedido.html"
     paginate_by = 50
 
-    # Melhora no desempenho da consulta, isso é um INNER JOIN no atributo CLIENTE
     def get_queryset(self):
         return Pedido.objects.all().select_related("cliente")
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        
+        pedidos = self.get_queryset()
+        for pedido in pedidos:
+            produtos_pedido = pedido.produtopedido_set.all()
+            pedido.total_itens = sum(item.quantidade for item in produtos_pedido)
+            pedido.valor_total = sum(item.quantidade * item.produto.valor for item in produtos_pedido)
+        
+        context["pedidos"] = pedidos
+        
+        return context
 
 
 class CarrinhoList(LoginRequiredMixin, ListView):

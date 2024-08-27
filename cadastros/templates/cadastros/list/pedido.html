@@ -24,14 +24,19 @@
             <tr>
                 <th>Código</th>
                 <th>Cliente</th>
-                <th>Criado em</th>
+                <th>Quantidade</th>
+                <th>Valor Total</th>
+                <th>Data de Cadastro</th>
+                <th></th>
             </tr>
         </thead>
         <tbody>
-            {% for obj in object_list %}
-            <tr class="">
+            {% for obj in pedidos %}
+            <tr>
                 <td>{{ obj.pk }}</td>
                 <td>{{ obj.cliente.nome }}</td>
+                <td>{{ obj.total_itens }}</td>
+                <td>R${{ obj.valor_total }}</td>
                 <td>{{ obj.criado_em }}</td>
                 <td>
                     <div class="dropdown">
@@ -56,5 +61,6 @@
         </tbody>
     </table>
 </div>
+
 
 {% endblock %}
