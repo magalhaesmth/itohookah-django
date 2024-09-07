@@ -18,6 +18,42 @@
 
 <hr>
 
+<div class="row mt-3">
+    <div class="col-md-12">
+        <form method="GET" class="d-flex">
+            <div class="row flex-grow-1">
+                <div class="col-md-3">
+                    <select name="cliente" class="form-control">
+                        <option value="">Cliente</option>
+                        {% for cliente in form.fields.cliente.queryset %}
+                        <option value="{{ cliente.pk }}" {% if cliente.pk == request.GET.cliente %}selected{% endif %}>
+                            {{ cliente.nome }}
+                        </option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="col-md-2">
+                    <input type="number" name="valor_min" class="form-control" placeholder="Valor Mínimo" value="{{ request.GET.valor_min }}">
+                </div>
+                <div class="col-md-2">
+                    <input type="number" name="valor_max" class="form-control" placeholder="Valor Máximo" value="{{ request.GET.valor_max }}">
+                </div>
+                <div class="col-md-2">
+                    <input type="date" name="data_inicio" class="form-control" placeholder="Data de Início" value="{{ request.GET.data_inicio }}">
+                </div>
+                <div class="col-md-2">
+                    <input type="date" name="data_fim" class="form-control" placeholder="Data de Fim" value="{{ request.GET.data_fim }}">
+                </div>
+                <div class="col-md-1 d-flex align-items-center justify-content-end">
+                    <button type="submit" class="btn btn-primary me-2">Filtrar</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<hr>
+
 <div class="table-responsive-lg">
     <table class="table table-striped">
         <thead>
@@ -61,6 +97,18 @@
         </tbody>
     </table>
 </div>
+
+<!-- Script para limpar os filtros quando der reload na pagina -->
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+
+        document.querySelector('input[name="data_inicio"]').value = '';
+        document.querySelector('input[name="data_fim"]').value = '';
+
+        document.querySelector('input[name="valor_min"]').value = '';
+        document.querySelector('input[name="valor_max"]').value = '';
+    });
+</script>
 
 
 {% endblock %}

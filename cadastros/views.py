@@ -3,7 +3,7 @@ from django.urls import reverse_lazy
 from django.http import JsonResponse
 from django.shortcuts import render, redirect
 from dal import autocomplete
-from .forms import PedidoForms, ProdutoFilterForm, ProdutoForms
+from .forms import PedidoForms, ProdutoFilterForm, ProdutoForms, PedidoFilterForm
 
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.views.generic.list import ListView
@@ -369,11 +369,32 @@ class PedidoList(LoginRequiredMixin, ListView):
     paginate_by = 50
 
     def get_queryset(self):
-        return Pedido.objects.all().select_related("cliente")
+        queryset = Pedido.objects.all().select_related("cliente")
+        cliente = self.request.GET.get('cliente')
+        valor_min = self.request.GET.get('valor_min')
+        valor_max = self.request.GET.get('valor_max')
+        data_inicio = self.request.GET.get('data_inicio')
+        data_fim = self.request.GET.get('data_fim')
+
+        if cliente:
+            queryset = queryset.filter(cliente__id=cliente)
+        if valor_min:
+            queryset = queryset.filter(valor_total__gte=valor_min)
+        if valor_max:
+            queryset = queryset.filter(valor_total__lte=valor_max)
+        if data_inicio:
+            queryset = queryset.filter(criado_em__date__gte=data_inicio)
+        if data_fim:
+            queryset = queryset.filter(criado_em__date__lte=data_fim)
+
+        return queryset
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+        form = PedidoFilterForm(self.request.GET or None)
+        context['form'] = form
         
+        # Adiciona a quantidade total e o valor total para cada pedido no contexto
         pedidos = self.get_queryset()
         for pedido in pedidos:
             produtos_pedido = pedido.produtopedido_set.all()

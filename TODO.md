@@ -5,11 +5,12 @@
 - [X] Diminuir quantidade do produto da venda
 - [X] Trazer o campo de cliente para abaixo do titulo no cadastro de pedido
 - [X] Tela de produtos deixar as imagens no mesmo tamanho
-- [ ] Django Filter ou filtros nas listagens
+- [X] Filtros na listagem de Pedidos
 - [ ] Filtros em todas as telas de listagens
 - [ ] Criação e correção nas telas de editar de todos
 - [ ] Tela de cadastro personalizada para cada um
 - [ ] Geração de pdf com filtros no relatorio de vendas
+- [ ] Geração de notinha de venda (tela de listagem de pedidos)
 
 **Urgentes**
 ---
