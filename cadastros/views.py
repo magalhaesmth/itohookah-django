@@ -3,7 +3,7 @@ from django.urls import reverse_lazy
 from django.http import JsonResponse
 from django.shortcuts import render, redirect
 from dal import autocomplete
-from .forms import PedidoForms, ProdutoFilterForm, ProdutoForms, PedidoFilterForm
+from .forms import PedidoForms, ProdutoFilterForm, PedidoFilterForm
 
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.views.generic.list import ListView

@@ -90,7 +90,7 @@ class Produto(models.Model):
     atualizado_em = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return f"Nome: {self.nome} | R${self.valor} |  Marca: {self.marca}"
+        return f"Nome: {self.nome} - Marca: {self.marca} - R${self.valor}"
     
 class Pedido(models.Model):
     cliente = models.ForeignKey(
