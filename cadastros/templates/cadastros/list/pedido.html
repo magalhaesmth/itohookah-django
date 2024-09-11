@@ -15,42 +15,47 @@
     </div>
 </div>
 
+<!-- Formulário de Filtro -->
 <div class="row mt-3">
     <div class="col-md-12">
-        <form method="GET" class="d-flex">
-            <div class="row flex-grow-1">
-                <div class="col-md-3">
-                    <select name="cliente" class="form-control">
-                        <option value="">Cliente</option>
-                        {% for cliente in form.fields.cliente.queryset %}
-                        <option value="{{ cliente.pk }}" {% if cliente.pk == request.GET.cliente %}selected{% endif %}>
-                            {{ cliente.nome }}
-                        </option>
-                        {% endfor %}
-                    </select>
+        <fieldset class="border p-3 rounded position-relative" style="padding-top: 1.5rem;">
+            <legend class="w-auto px-2 text-center position-absolute" style="top: -1rem; left: 50%; transform: translateX(-50%); font-size: 1.2rem; background: white;">Filtros</legend>
+            <form method="GET" class="d-flex">
+                <div class="row flex-grow-1">
+                    <div class="col-md-3">
+                        <select name="cliente" class="form-control">
+                            <option value="">Cliente</option>
+                            {% for cliente in form.fields.cliente.queryset %}
+                            <option value="{{ cliente.pk }}" {% if cliente.pk == request.GET.cliente %}selected{% endif %}>
+                                {{ cliente.nome }}
+                            </option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="col-md-2">
+                        <input type="number" name="valor_min" class="form-control" placeholder="Valor Mínimo" value="{{ request.GET.valor_min }}">
+                    </div>
+                    <div class="col-md-2">
+                        <input type="number" name="valor_max" class="form-control" placeholder="Valor Máximo" value="{{ request.GET.valor_max }}">
+                    </div>
+                    <div class="col-md-2">
+                        <input type="date" name="data_inicio" class="form-control" placeholder="Data de Início" value="{{ request.GET.data_inicio }}">
+                    </div>
+                    <div class="col-md-2">
+                        <input type="date" name="data_fim" class="form-control" placeholder="Data de Fim" value="{{ request.GET.data_fim }}">
+                    </div>
+                    <div class="col-md-1 d-flex align-items-center justify-content-end">
+                        <button type="submit" class="btn btn-primary me-2">Filtrar</button>
+                    </div>
                 </div>
-                <div class="col-md-2">
-                    <input type="number" name="valor_min" class="form-control" placeholder="Valor Mínimo" value="{{ request.GET.valor_min }}">
-                </div>
-                <div class="col-md-2">
-                    <input type="number" name="valor_max" class="form-control" placeholder="Valor Máximo" value="{{ request.GET.valor_max }}">
-                </div>
-                <div class="col-md-2">
-                    <input type="date" name="data_inicio" class="form-control" placeholder="Data de Início" value="{{ request.GET.data_inicio }}">
-                </div>
-                <div class="col-md-2">
-                    <input type="date" name="data_fim" class="form-control" placeholder="Data de Fim" value="{{ request.GET.data_fim }}">
-                </div>
-                <div class="col-md-1 d-flex align-items-center justify-content-end">
-                    <button type="submit" class="btn btn-primary me-2">Filtrar</button>
-                </div>
-            </div>
-        </form>
+            </form>
+        </fieldset>
     </div>
 </div>
 
 <hr>
 
+<!-- Listagem dos pedidos -->
 <div class="table-responsive-lg">
     <table class="table table-striped">
         <thead>
