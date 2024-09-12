@@ -3,9 +3,15 @@
 {% load static %}
 
 {% block conteudo %}
+
 <div class="row justify-content-center align-items-center mt-3">
-    <div class="col-md-12">
+    <div class="col-md-10">
         <h3 class="">Lista de Produtos</h3>
+    </div>
+    <div class="col-md d-flex justify-content-end">
+        <a href="{% url 'cadastrar-produto' %}" class="btn btn-success d-flex align-items-center">
+            Cadastrar Produto
+        </a>
     </div>
 </div>
 
@@ -23,39 +29,39 @@
 <!-- Formulário de Filtro -->
 <div class="row mt-3">
     <div class="col-md-12">
-        <form method="GET" class="d-flex">
-            <div class="row flex-grow-1">
-                <div class="col-md-3">
-                    <input type="text" name="nome" class="form-control" placeholder="Nome" value="{{ request.GET.nome }}">
+        <fieldset class="border p-3 rounded position-relative" style="padding-top: 1.5rem;">
+            <legend class="w-auto px-2 text-center position-absolute" style="top: -1rem; left: 50%; transform: translateX(-50%); font-size: 1.2rem; background: white;">Filtros</legend>
+            <form method="GET" class="d-flex">
+                <div class="row flex-grow-1">
+                    <div class="col-md-3">
+                        <input type="text" name="nome" class="form-control" placeholder="Nome" value="{{ request.GET.nome }}">
+                    </div>
+                    <div class="col-md-3">
+                        <select name="categoria" class="form-control">
+                            <option value="">Categoria</option>
+                            {% for categoria in filter_form.fields.categoria.queryset %}
+                            <option value="{{ categoria.pk }}" {% if categoria.pk == request.GET.categoria %}selected{% endif %}>
+                                {{ categoria }}
+                            </option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="col-md-3">
+                        <select name="fornecedor" class="form-control">
+                            <option value="">Fornecedor</option>
+                            {% for fornecedor in filter_form.fields.fornecedor.queryset %}
+                            <option value="{{ fornecedor.pk }}" {% if fornecedor.pk == request.GET.fornecedor %}selected{% endif %}>
+                                {{ fornecedor }}
+                            </option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="col-md-3 d-flex align-items-center justify-content-end">
+                        <button type="submit" class="btn btn-primary me-2">Filtrar</button>
+                    </div>
                 </div>
-                <div class="col-md-3">
-                    <select name="categoria" class="form-control">
-                        <option value="">Categoria</option>
-                        {% for categoria in filter_form.fields.categoria.queryset %}
-                        <option value="{{ categoria.pk }}" {% if categoria.pk == request.GET.categoria %}selected{% endif %}>
-                            {{ categoria }}
-                        </option>
-                        {% endfor %}
-                    </select>
-                </div>
-                <div class="col-md-3">
-                    <select name="fornecedor" class="form-control">
-                        <option value="">Fornecedor</option>
-                        {% for fornecedor in filter_form.fields.fornecedor.queryset %}
-                        <option value="{{ fornecedor.pk }}" {% if fornecedor.pk == request.GET.fornecedor %}selected{% endif %}>
-                            {{ fornecedor }}
-                        </option>
-                        {% endfor %}
-                    </select>
-                </div>
-                <div class="col-md-3 d-flex align-items-center justify-content-end">
-                    <button type="submit" class="btn btn-primary me-2">Filtrar</button>
-                    <a href="{% url 'cadastrar-produto' %}" class="btn btn-success d-flex align-items-center">
-                        Cadastrar Produto
-                    </a>
-                </div>
-            </div>
-        </form>
+            </form>
+        </fieldset>
     </div>
 </div>
 
