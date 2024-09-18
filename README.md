@@ -1,3 +1,5 @@
+## **ITH - Sistema de Gerenciamento de uma Conveniência Local**
+
 - Na pasta raiz do projeto executar os seguintes comandos:
 
 ```bash
@@ -18,9 +20,3 @@ pip install django-debug-toolbar
 ```bash
 pip install Pillow
 ```
-
-## Diagrama de Classes
-
-<h1 align=center>
-    <img src="/static/img/diagramadeclasses.png">
-</h1>

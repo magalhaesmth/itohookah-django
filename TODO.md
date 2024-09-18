@@ -10,7 +10,6 @@
 - [ ] Criação e correção nas telas de editar de todos
 - [ ] Tela de cadastro personalizada para cada um
 - [ ] Geração de pdf com filtros no relatorio de vendas
-- [ ] Geração de notinha de venda (tela de listagem de pedidos)
 
 **Urgentes**
 ---
