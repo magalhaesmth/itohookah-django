@@ -394,16 +394,28 @@ class PedidoList(LoginRequiredMixin, ListView):
         form = PedidoFilterForm(self.request.GET or None)
         context['form'] = form
         
-        # Adiciona a quantidade total e o valor total para cada pedido no contexto
         pedidos = self.get_queryset()
+
+        # Adiciona a quantidade total e o valor total para todos os pedidos filtrados
+        total_itens_geral = 0
+        valor_total_geral = 0
+
         for pedido in pedidos:
             produtos_pedido = pedido.produtopedido_set.all()
             pedido.total_itens = sum(item.quantidade for item in produtos_pedido)
             pedido.valor_total = sum(item.quantidade * item.produto.valor for item in produtos_pedido)
-        
+
+            # Somar os itens e o valor total geral
+            total_itens_geral += pedido.total_itens
+            valor_total_geral += pedido.valor_total
+
+        # Adiciona os totais gerais no contexto
+        context["total_itens_geral"] = total_itens_geral
+        context["valor_total_geral"] = valor_total_geral
         context["pedidos"] = pedidos
-        
+
         return context
+
 
 
 class CarrinhoList(LoginRequiredMixin, ListView):

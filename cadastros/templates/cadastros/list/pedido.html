@@ -100,6 +100,26 @@
     </table>
 </div>
 
+<!-- Tabela com os totais filtrados -->
+<div class="table-responsive-lg mt-3">
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th style="text-align: center;">Total de Itens</th>
+                <th style="text-align: center;">Total Recebido</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td style="text-align: center;">Quantidade: {{ total_itens_geral }}</td>
+                <td style="text-align: center;">R${{ valor_total_geral }}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+
+
 <!-- Script para limpar os filtros quando der reload na pagina -->
 <script>
     document.addEventListener('DOMContentLoaded', function() {
