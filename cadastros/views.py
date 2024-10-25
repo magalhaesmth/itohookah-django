@@ -369,7 +369,7 @@ class PedidoList(LoginRequiredMixin, ListView):
     paginate_by = 50
 
     def get_queryset(self):
-        queryset = Pedido.objects.all().select_related("cliente")
+        queryset = Pedido.objects.all().select_related("cliente").order_by('-criado_em')
         cliente = self.request.GET.get('cliente')
         valor_min = self.request.GET.get('valor_min')
         valor_max = self.request.GET.get('valor_max')
