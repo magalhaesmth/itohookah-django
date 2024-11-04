@@ -3,7 +3,7 @@ from django.urls import reverse_lazy
 from django.http import JsonResponse
 from django.shortcuts import render, redirect
 from dal import autocomplete
-from .forms import PedidoForms, ProdutoFilterForm, PedidoFilterForm
+from .forms import CarrinhoForm, PedidoForms, ProdutoFilterForm, PedidoFilterForm
 
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.views.generic.list import ListView
@@ -147,8 +147,8 @@ class PedidoCreate(LoginRequiredMixin, CreateView):
 
 class CarrinhoCreate(LoginRequiredMixin, CreateView):
     model = Carrinho
-    fields = ["produto", "quantidade"]
-    template_name = "cadastros/form-pedido.html"
+    form_class = CarrinhoForm
+    template_name = "cadastros/form-carrinho.html"
     success_url = reverse_lazy("cadastrar-pedido")
     extra_context = {"titulo": "Adicionar item ao Carrinho"}
 
@@ -234,7 +234,7 @@ class ProdutoUpdate(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
 class CarrinhoUpdate(LoginRequiredMixin, UpdateView):
     model = Carrinho
     fields = ["produto", "quantidade"]
-    template_name = "cadastros/form-pedido.html"
+    template_name = "cadastros/form-carrinho.html"
     success_url = reverse_lazy("cadastrar-pedido")
     extra_context = {"titulo": "Editar item do carrinho"}
 
@@ -242,6 +242,7 @@ class CarrinhoUpdate(LoginRequiredMixin, UpdateView):
         if form.cleaned_data['quantidade'] <= 0:
             form.add_error('quantidade', 'A quantidade deve ser maior que 0.')
             return self.form_invalid(form)
+
         return super().form_valid(form)
 
     def get_context_data(self, **kwargs):
@@ -300,7 +301,7 @@ class PedidoDelete(LoginRequiredMixin, DeleteView):
 class CarrinhoDelete(LoginRequiredMixin, DeleteView):
     model = Carrinho
     template_name = "cadastros/delete.html"
-    success_url = reverse_lazy("listar-carrinho")
+    success_url = reverse_lazy("cadastrar-carrinho")
 
 ######################################################################################
 

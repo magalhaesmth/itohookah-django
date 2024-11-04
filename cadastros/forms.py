@@ -1,8 +1,9 @@
 from dal import autocomplete
 from django import forms
 from django.contrib.admin.widgets import AdminDateWidget
-from .models import Pedido, Produto, Categoria, Fornecedor, Cliente
-
+from .models import Carrinho, Pedido, Produto, Categoria, Fornecedor, Cliente
+from crispy_forms.helper import FormHelper
+from crispy_forms.layout import Layout, Row, Column
 
 class ProdutoForms(forms.ModelForm):
     preco = forms.DecimalField(decimal_places=2, max_digits=9, localize=True)
@@ -24,6 +25,21 @@ class PedidoForms(forms.ModelForm):
                 },
             )
         }
+
+class CarrinhoForm(forms.ModelForm):
+    class Meta:
+        model = Carrinho
+        fields = ["produto", "quantidade"]
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.helper = FormHelper()
+        self.helper.layout = Layout(
+            Row(
+                Column('produto', css_class='col-md-10'),
+                Column('quantidade', css_class='col-md-2'),
+            )
+        )
 
 class ProdutoFilterForm(forms.Form):
     nome = forms.CharField(required=False, label='Nome')
