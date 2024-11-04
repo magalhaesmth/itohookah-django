@@ -242,6 +242,11 @@ class CarrinhoUpdate(LoginRequiredMixin, UpdateView):
         if form.cleaned_data['quantidade'] <= 0:
             form.add_error('quantidade', 'A quantidade deve ser maior que 0.')
             return self.form_invalid(form)
+        
+        produto = form.instance.produto
+        if form.cleaned_data['quantidade'] > produto.quantidade:
+            form.add_error('quantidade', f'A quantidade disponível em estoque é {produto.quantidade}.')
+            return self.form_invalid(form)
 
         return super().form_valid(form)
 
