@@ -503,3 +503,16 @@ class ClienteAutocomplete(LoginRequiredMixin, autocomplete.Select2QuerySetView):
             )
 
         return object_list
+
+class ProdutoAutocomplete(LoginRequiredMixin, autocomplete.Select2QuerySetView):
+    def get_queryset(self):
+
+        if not self.request.user.is_authenticated:
+            return Produto.objects.none()
+        
+        queryset = Produto.objects.all()
+
+        if self.q:
+            queryset = queryset.filter(nome__icontains=self.q)
+
+        return queryset

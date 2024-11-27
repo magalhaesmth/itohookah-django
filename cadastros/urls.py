@@ -6,6 +6,7 @@ from .views import ClienteCreate, ClienteUpdate, ClienteList, ClienteDelete
 from .views import PedidoCreate, PedidoList, PedidoDelete
 from .views import CarrinhoCreate, CarrinhoList, CarrinhoUpdate, CarrinhoDelete
 from .views import ClienteAutocomplete
+from .views import ProdutoAutocomplete
 
 urlpatterns = [
 
@@ -61,5 +62,6 @@ urlpatterns = [
     #Ajax
 
     path("listar_produtos/", views.listar_produtos, name="listar_produtos"),
-    path("buscar/cliente", ClienteAutocomplete.as_view(), name="buscar-cliente")
+    path("buscar/cliente", ClienteAutocomplete.as_view(), name="buscar-cliente"),
+    path("buscar/produto", ProdutoAutocomplete.as_view(), name="buscar-produto")
 ]

@@ -21,15 +21,24 @@ class PedidoForms(forms.ModelForm):
                 url='buscar-cliente',
                 attrs={
                     'data-placeholder': 'Informe o nome do cliente...',
-                    'data-minimum-input-length': 3,
+                    'data-minimum-input-length': 2,
                 },
             )
         }
 
 class CarrinhoForm(forms.ModelForm):
     class Meta:
-        model = Carrinho
-        fields = ["produto", "quantidade"]
+            model = Carrinho
+            fields = ["produto", "quantidade"]
+            widgets = {
+                'produto': autocomplete.ModelSelect2(
+                    url='buscar-produto',
+                    attrs={
+                        'data-placeholder': 'Informe o nome do produto...',
+                        'data-minimum-input-length': 2,
+                    },
+                ),
+            }
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
