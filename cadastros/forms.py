@@ -20,8 +20,9 @@ class PedidoForms(forms.ModelForm):
             'cliente': autocomplete.ModelSelect2(
                 url='buscar-cliente',
                 attrs={
-                    'data-placeholder': 'Informe o nome do cliente...',
-                    'data-minimum-input-length': 2,
+                    'data-placeholder': 'Informe o nome do cliente',
+                    'data-minimum-input-length': 0,
+                    'data-allow-clear': 'true',
                 },
             )
         }
@@ -34,8 +35,9 @@ class CarrinhoForm(forms.ModelForm):
                 'produto': autocomplete.ModelSelect2(
                     url='buscar-produto',
                     attrs={
-                        'data-placeholder': 'Informe o nome do produto...',
-                        'data-minimum-input-length': 2,
+                        'data-placeholder': 'Informe o nome do produto',
+                        'data-minimum-input-length': 0,
+                        'data-allow-clear': 'true',
                     },
                 ),
             }
