@@ -116,14 +116,26 @@
 
     <br>
     <div class="col-md-12 d-flex align-items-center justify-content-end">
+        <!-- Botão Voltar -->
         <button type="button" class="btn btn-grey" style="margin-right: 10px;" onclick="history.back();">
             Voltar
         </button>
-        <button type="submit" class="btn btn-green float-end">{{descricao_botao|default:"Salvar"}}</button>
+        <!-- Botão Salvar -->
+        <button type="submit" class="btn btn-green float-end">
+            {{ descricao_botao|default:"Salvar" }}
+        </button>
     </div>
-    
 </form>
 
+<!-- Formulário Exclusivo para "Limpar Carrinho" -->
+<form action="" method="post" style="display: inline;">
+    {% csrf_token %}
+    <div class="col-md-12 d-flex align-items-center justify-content-end mt-2">
+        <button type="submit" name="limparcarrinho" class="btn btn-danger">
+            Limpar Carrinho
+        </button>
+    </div>
+</form>
 
 {% endblock %}
 

@@ -152,6 +152,13 @@ class CarrinhoCreate(LoginRequiredMixin, CreateView):
     success_url = reverse_lazy("cadastrar-pedido")
     extra_context = {"titulo": "Adicionar item ao Carrinho"}
 
+    def post(self, request, *args, **kwargs):
+            if "limparcarrinho" in request.POST:
+                Carrinho.objects.all().delete()
+                return redirect(self.success_url)
+            
+            return super().post(request, *args, **kwargs)
+
     def form_valid(self, form):
         item = Carrinho.objects.filter(produto = form.instance.produto)
         if(item.exists()):
