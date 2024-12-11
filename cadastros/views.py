@@ -149,7 +149,7 @@ class CarrinhoCreate(LoginRequiredMixin, CreateView):
     model = Carrinho
     form_class = CarrinhoForm
     template_name = "cadastros/form-carrinho.html"
-    success_url = reverse_lazy("cadastrar-pedido")
+    success_url = reverse_lazy("cadastrar-carrinho")
     extra_context = {"titulo": "Adicionar item ao Carrinho"}
 
     def post(self, request, *args, **kwargs):
